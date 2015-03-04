@@ -1,0 +1,4 @@
+Fix-soname-option-in-libtool
+fix-default-dbtype.patch
+fix-mysql55-sql-syntax.patch
+fix-sql-bindir

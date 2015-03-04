@@ -1,0 +1,46 @@
+# Portuguese Translation for bacula debconf messages
+# This file is distributed under the same license as the bacula package.
+# Ricardo Silva <ardoric@gmail.com>, 2006
+# Rui Branco <ruipb@debianpt.org>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bacula 7.0.5\n"
+"Report-Msgid-Bugs-To: bacula@packages.debian.org\n"
+"POT-Creation-Date: 2008-01-27 22:28+0100\n"
+"PO-Revision-Date: 2012-10-08 20:59+0100\n"
+"Last-Translator: Rui Branco <ruipb@debianpt.org>\n"
+"Language-Team: Portuguese <traduz@debianpt.org>\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid "Unsafe bacula-director password changed"
+msgstr "Palavra-chave insegura do bacula-director modificada"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"This installation of Bacula was still using an unsafe password for access to "
+"the bacula-director service, as shipped with old versions of Bacula."
+msgstr ""
+"Esta instalação do Bacula estava ainda a utilizar uma palavra-chave insegura "
+"para o acesso ao serviço bacula-director tal como distribuído nas anteriores "
+"versões do Bacula."
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"In order to secure this Bacula server, the password in bacula-dir.conf has "
+"been modified. You will need to change it on clients so that they can still "
+"access the bacula-director service."
+msgstr ""
+"De modo a tornar seguro o servidor Bacula, a palavra-chave no ficheiro "
+"bacula-dir.conf foi modificada. Terá que a alterar nos clientes para que os "
+"mesmos tenham acesso ao serviço bacula-director."

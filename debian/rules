@@ -1,0 +1,171 @@
+#!/usr/bin/make -f
+
+#export DH_VERBOSE=1
+
+DEB_HOST_ARCH_OS    ?= $(shell dpkg-architecture -qDEB_HOST_ARCH_OS)
+DBGPKGS := $(shell sed -n -e 's/Package: \(.*\)-dbg/\1/p' debian/control)
+
+VARIANTS := pgsql mysql sqlite3
+
+######################################################################
+
+DBC := usr/share/dbconfig-common/data/
+
+CONF_ALL	= \
+	--enable-smartalloc \
+	--with-python \
+	--with-tcp-wrappers \
+	--with-openssl \
+	--with-libiconv-prefix=/usr/include \
+	--with-readline=/usr/include/readline \
+	--disable-conio \
+	--with-libintl-prefix=/usr/include \
+	--docdir=\$${prefix}/share/doc/bacula-common \
+	--htmldir=\$${prefix}/share/doc/bacula-common/html \
+	--libdir=\$${prefix}/lib/bacula \
+	--enable-batch-insert \
+	--enable-ipv6 \
+	--with-dir-password=XXX_DIRPASSWORD_XXX \
+	--with-fd-password=XXX_FDPASSWORD_XXX \
+	--with-sd-password=XXX_SDPASSWORD_XXX \
+	--with-mon-dir-password=XXX_MONDIRPASSWORD_XXX \
+	--with-mon-fd-password=XXX_MONFDPASSWORD_XXX \
+	--with-mon-sd-password=XXX_MONSDPASSWORD_XXX \
+	--with-db-name=XXX_DBNAME_XXX \
+	--with-db-user=XXX_DBUSER_XXX \
+	--with-db-password=XXX_DBPASSWORD_XXX \
+	--config-cache \
+	--with-archivedir=/nonexistant/path/to/file/archive/dir \
+	--sysconfdir=/etc/bacula \
+	--with-scriptdir=/etc/bacula/scripts \
+	--sharedstatedir=/var/lib/bacula \
+	--localstatedir=/var/lib/bacula \
+	--with-logdir=/var/log/bacula \
+	--with-pid-dir=/var/run/bacula \
+	--with-smtp-host=localhost \
+	--with-working-dir=/var/lib/bacula \
+	--with-subsys-dir=/var/lock \
+	--with-dump-email=root \
+	--with-job-email=root \
+	--with-systemd=/lib/systemd/system \
+	--with-mysql --with-postgresql --with-sqlite3 \
+	--enable-bat --enable-bwx-console --with-x \
+	--with-basename=localhost --with-hostname=localhost
+
+ifeq ($(DEB_HOST_ARCH_OS),kfreebsd)
+CONF_ALL	+= --disable-acl --disable-xattr
+endif
+
+LONGNAME_mysql		= mysql
+LONGNAME_pgsql		= postgresql
+LONGNAME_sqlite3	= sqlite3
+
+###########################################################################
+
+# Macro for generate file for specified database from specified template
+# args: 1 -- template file
+#       2 -- db type
+define template-subst
+sed -e 's/XX_DB_XX/$(2)/g' -e 's/XX_DBLONGNAME_XX/$(LONGNAME_$(2))/g' '$(1)' >'$(patsubst %.in,%,$(subst -db.,-$(2).,$(1)))';
+endef
+
+# Macro for cleanup file generated for specified database from specified template
+# args: 1 -- template file
+#       2 -- db type
+define template-cleanup
+rm -f '$(patsubst %.in,%,$(subst -db.,-$(2).,$(1)))';
+endef
+
+# Macro for generate from all templates files for specified database
+# args: 1 -- db type
+define db-templates-subst
+$(foreach template,$(wildcard debian/*-db.*.in),$(call template-subst,$(template),$(1)))
+endef
+
+# Macro for cleanup all files generated for specified database from templates
+# args: 1 -- db type
+define db-templates-cleanup
+$(foreach template,$(wildcard debian/*-db.*.in),$(call template-cleanup,$(template),$(1)))
+endef
+
+%:
+	dh $@ --with autotools_dev
+
+override_dh_shlibdeps:
+	# Handle shlibs for the database packages specially so they get
+	# the deps on the correct libraries.
+	dh_shlibdeps -pbacula-sd-mysql -Lbacula-common-mysql
+	dh_shlibdeps -pbacula-director-mysql -Lbacula-common-mysql
+	dh_shlibdeps -pbacula-sd-sqlite3 -Lbacula-common-sqlite3
+	dh_shlibdeps -pbacula-director-sqlite3 -Lbacula-common-sqlite3
+	dh_shlibdeps -pbacula-sd-pgsql -Lbacula-common-pgsql
+	dh_shlibdeps -pbacula-director-pgsql -Lbacula-common-pgsql
+	# Now build all other shlibdeps.
+	dh_shlibdeps -a -Nbacula-sd-mysql -Nbacula-director-mysql \
+		-Nbacula-sd-sqlite3 -Nbacula-director-sqlite3 \
+		-Nbacula-sd-pgsql -Nbacula-director-pgsql
+
+override_dh_installinit:
+	dh_installinit -pbacula-sd -- defaults 90 10
+	dh_installinit -pbacula-fd -- defaults 91 9
+	dh_installinit -pbacula-director-common --name=bacula-director --no-start -- defaults 92 8
+
+override_dh_install:
+	chmod 755 debian/additions/postinst-common
+	chmod 755 debian/scripts/install-dbconfig
+	dh_install
+	chmod 755 debian/bacula-common/usr/lib/bacula/btraceback
+	######### dbconfig-common stuff
+	# Sometimes the latest release doesn't have a copy of the data in updatedb.
+	# Manually install those. CHECK THIS FOR EACH NEW RELEASE!
+	#
+	# lenny -> squeeze is 10 -> 12
+	$(foreach db,$(VARIANTS),$(shell debian/scripts/install-dbconfig $(db) 3.0.0 11)) # 3.0.0 upgrade 10 to 11
+	$(foreach db,$(VARIANTS),$(shell debian/scripts/install-dbconfig $(db) 5.0.0 12)) # 5.0.0 upgrade 11 to 12
+	$(foreach db,$(VARIANTS),$(shell debian/scripts/install-dbconfig $(db) 5.2.0))    # 5.2.0 upgrade 12 to 14
+	$(foreach db,$(VARIANTS),$(shell debian/scripts/install-dbconfig $(db)))
+	# fix database type in some scripts
+	$(foreach db,$(VARIANTS),sed -i \
+	  -e "s/XX_DB_XX/$(db)/g" \
+		-e "s/XX_DBLONGNAME_XX/$(LONGNAME_$(db))/g" \
+		debian/bacula-director-$(db)/etc/bacula/scripts/make_catalog_backup \
+		debian/bacula-director-$(db)/etc/bacula/scripts/make_catalog_backup.pl;)
+
+
+override_dh_installdocs:
+	dh_installdocs -pbacula --link-doc=bacula-common
+	for pkg in $(DBGPKGS); do \
+		dh_installdocs -p$$pkg-dbg --link-doc=$$pkg; \
+		done
+	dh_installdocs -Nbacula
+
+override_dh_auto_configure:
+	$(foreach db,$(VARIANTS),$(call db-templates-subst,$(db)))
+	autoconf -I autoconf/ -o configure autoconf/configure.in
+	dh_auto_configure -- $(CONF_ALL)
+
+override_dh_auto_build:
+	dh_auto_build --parallel
+
+override_dh_strip:
+	for pkg in $(DBGPKGS); do \
+		dh_strip -p$$pkg --dbg-package=$$pkg-dbg; \
+		done
+	dh_strip
+
+override_dh_makeshlibs:
+	dh_makeshlibs -n -Xbpipe-fd.so
+
+override_dh_clean:
+	$(foreach db,$(VARIANTS),$(call db-templates-cleanup,$(db)))
+	dh_autotools-dev_restoreconfig
+	rm -f scripts/logwatch/Makefile scripts/Makefile po/Makefile src/plugins/sd/Makefile src/plugins/dir/Makefile examples/nagios/check_bacula/Makefile config.log
+	dh_clean
+
+override_dh_fixperms:
+	dh_fixperms
+	chmod -x debian/bacula-sd/etc/bacula/scripts/mtx-changer.conf
+	chmod -x debian/bacula-common/usr/share/doc/bacula-common/examples/nagios/check_bacula/README
+	chmod +x debian/bacula-director-*/etc/bacula/scripts/make_catalog_backup_awk
+
+override_dh_auto_test:

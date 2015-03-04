@@ -1,0 +1,46 @@
+# Translation of bacula templates into German
+# Copyright (C) 2012 Holger Wansing <linux@wansing-online.de>
+# This file is distributed under the same license as the bacula package.
+# Holger Wansing <linux@wansing-online.de>, 2012
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bacula 7.0.5\n"
+"Report-Msgid-Bugs-To: bacula@packages.debian.org\n"
+"POT-Creation-Date: 2012-10-02 07:10+0200\n"
+"PO-Revision-Date: 2012-10-05 09:10+0200\n"
+"Last-Translator: Holger Wansing <linux@wansing-online.de>\n"
+"Language-Team: German <debian-l10n-german@lists.debian.org>\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid "Unsafe bacula-director password changed"
+msgstr "Unsicheres bacula-director-Passwort geändert"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"This installation of Bacula was still using an unsafe password for access to "
+"the bacula-director service, as shipped with old versions of Bacula."
+msgstr ""
+"Diese Bacula-Installation nutzte noch ein unsicheres Passwort für den "
+"Zugriff auf den bacula-director-Dienst, wie dies bei alten Versionen von "
+"Bacula der Fall war."
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"In order to secure this Bacula server, the password in bacula-dir.conf has "
+"been modified. You will need to change it on clients so that they can still "
+"access the bacula-director service."
+msgstr ""
+"Um diesen Bacula-Server abzusichern, wurde das Passwort in bacula-dir.conf "
+"geändert. Sie werden es auf den Clients ändern müssen, so dass diese wieder "
+"auf den bacula-director-Dienst zugreifen können."

@@ -1,0 +1,48 @@
+# Translation of bacula debconf templates to Polish.
+# Copyright (C) 2012
+# This file is distributed under the same license as the bacula package.
+#
+# Michał Kułach <michal.kulach@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: bacula\n"
+"Report-Msgid-Bugs-To: bacula@packages.debian.org\n"
+"POT-Creation-Date: 2012-10-02 07:10+0200\n"
+"PO-Revision-Date: 2012-10-14 15:04+0200\n"
+"Last-Translator: Michał Kułach <michal.kulach@gmail.com>\n"
+"Language-Team: Polish <debian-l10n-polish@lists.debian.org>\n"
+"Language: pl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 1.4\n"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid "Unsafe bacula-director password changed"
+msgstr "Zmieniono niebezpieczne hasło bacula-director"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"This installation of Bacula was still using an unsafe password for access to "
+"the bacula-director service, as shipped with old versions of Bacula."
+msgstr ""
+"Ta instalacja Baculi wciąż używała niebezpiecznego hasła do dostępu do "
+"usługi bacula-director, dostarczanego razem ze starszymi wersjami Baculi."
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"In order to secure this Bacula server, the password in bacula-dir.conf has "
+"been modified. You will need to change it on clients so that they can still "
+"access the bacula-director service."
+msgstr ""
+"Aby zabezpieczyć serwer Bacula, hasło w bacula-dir.conf zostało "
+"zmodyfikowane. Konieczna będzie samodzielna zmiana haseł klientów bacula-"
+"director, aby mogły wciąż uzyskać dostęp do tej usługi."

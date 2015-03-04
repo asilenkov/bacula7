@@ -1,0 +1,59 @@
+Description: <short summary of the patch>
+ TODO: Put a short summary on the line above and replace this paragraph
+ with a longer explanation of this change. Complete the meta-information
+ with other relevant fields (see below for details). To make it easier, the
+ information below has been extracted from the changelog. Adjust it or drop
+ it.
+ .
+ bacula (7.0.5) unstable; urgency=low
+ .
+   * New package with 7.0.5 version:
+Author: Jordi Clariana <jclariana@trovit.com>
+
+---
+The information above should follow the Patch Tagging Guidelines, please
+checkout http://dep.debian.net/deps/dep3/ to learn about the format. Here
+are templates for supplementary fields that you might want to add:
+
+Origin: <vendor|upstream|other>, <url of original patch>
+Bug: <url in upstream bugtracker>
+Bug-Debian: http://bugs.debian.org/<bugnumber>
+Bug-Ubuntu: https://launchpad.net/bugs/<bugnumber>
+Forwarded: <no|not-needed|url proving that it has been forwarded>
+Reviewed-By: <name and email of someone who approved the patch>
+Last-Update: <YYYY-MM-DD>
+
+--- bacula-7.0.5.orig/autoconf/ltmain.sh
++++ bacula-7.0.5/autoconf/ltmain.sh
+@@ -2429,6 +2429,7 @@ The following components of LINK-COMMAND
+   -R[ ]LIBDIR       add LIBDIR to the runtime path of programs and libraries
+   -shared           only do dynamic linking of libtool libraries
+   -shrext SUFFIX    override the standard shared library file extension
++  -soname SONAME    override the standard shared object name
+   -static           do not do any dynamic linking of uninstalled libtool libraries
+   -static-libtool-libs
+                     do not do any dynamic linking of libtool libraries
+@@ -5434,6 +5435,11 @@ func_mode_link ()
+ 	  prev=
+ 	  continue
+ 	  ;;
++        soname)
++	  soname_spec="$arg"
++	  prev=
++	  continue
++	  ;;
+ 	weak)
+ 	  func_append weak_libs " $arg"
+ 	  prev=
+@@ -5754,6 +5760,11 @@ func_mode_link ()
+ 	continue
+ 	;;
+ 
++      -soname)
++	prev=soname
++	continue
++	;;
++
+       -static | -static-libtool-libs)
+ 	# The effects of -static are defined in a previous loop.
+ 	# We used to do the same as -all-static on platforms that

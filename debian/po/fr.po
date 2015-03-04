@@ -1,0 +1,46 @@
+# Translation of bacula debconf templates to french. 
+# Copyright (C) 2012, French l10n team <debian-l10n-french@lists.debian.org>
+# This file is distributed under the same license as the bacula package.
+# Julien Patriarca <patriarcaj@gmail.com>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bacula\n"
+"Report-Msgid-Bugs-To: bacula@packages.debian.org\n"
+"POT-Creation-Date: 2012-10-02 07:10+0200\n"
+"PO-Revision-Date: 2012-10-02 11:34+0100\n"
+"Last-Translator: Julien Patriarca <patriarcaj@gmail.com>\n"
+"Language-Team: FRENCH <debian-l10n-french@lists.debian.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid "Unsafe bacula-director password changed"
+msgstr "Changement forcé du mot de passe trop faible pour bacula-director"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"This installation of Bacula was still using an unsafe password for access to "
+"the bacula-director service, as shipped with old versions of Bacula."
+msgstr ""
+"Cette installation de Bacula utilisait encore un mot de passe trop faible "
+"pour accéder au service bacula-director. Ce mot de passe était celui qui "
+"était créé par défaut avec les anciennes versions de Bacula."
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"In order to secure this Bacula server, the password in bacula-dir.conf has "
+"been modified. You will need to change it on clients so that they can still "
+"access the bacula-director service."
+msgstr ""
+"Afin de rendre le serveur Bacula plus sûr, le mot de passe défini dans "
+"bacula-dir.conf a été modifié. Il est indispensable de le modifier sur les "
+"clients afin de préserver leur accès au service bacula-director."

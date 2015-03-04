@@ -1,0 +1,3 @@
+version=3
+opts=dversionmangle=s/\+dfsgreal// \
+http://sf.net/bacula/bacula-?_?([\w+\d+\.]+|\d+)\.tar\.gz debian uupdate

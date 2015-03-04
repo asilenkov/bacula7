@@ -1,0 +1,509 @@
+Source: bacula
+Section: admin
+Priority: optional
+Maintainer: Debian Bacula Team <pkg-bacula-devel@lists.alioth.debian.org>
+Uploaders: Jan Hauke Rahm <jhr@debian.org>, Luca Capello <luca@pca.it>
+Build-Depends: autotools-dev, autoconf, debhelper (>= 8.1.3), po-debconf,
+ zlib1g-dev, libreadline-dev, libsqlite3-dev, libmysqlclient-dev, libpq-dev
+ (>= 9.1), postgresql-server-dev-all, libwrap0-dev, python-dev, libgtk2.0-dev,
+ libgnome2-dev, libacl1-dev, libkrb5-dev, libgnomeui-dev, libx11-dev, mtx, bc,
+ libxt-dev, libqt4-dev (>= 4.8.4), libssl-dev, libcap-dev [linux-any]
+Build-Conflicts: python2.4
+Standards-Version: 3.9.2
+Vcs-Browser: http://anonscm.debian.org/gitweb/?p=pkg-bacula/bacula.git;a=summary
+Vcs-Git: git://anonscm.debian.org/pkg-bacula/bacula.git
+Homepage: http://www.bacula.org/
+
+Package: bacula
+Architecture: all
+Depends: bacula-server, bacula-client, bacula-common, ${misc:Depends}
+Suggests: bacula-doc
+Description: network backup service - metapackage
+ Bacula is a set of programs to manage backup, recovery, and verification
+ of computer data across a network of computers of different kinds.
+ .
+ It is efficient and relatively easy to use, while offering many advanced
+ storage management features that make it easy to find and recover lost or
+ damaged files. Due to its modular design, Bacula is scalable from small
+ single computer systems to networks of hundreds of machines.
+ .
+ This metapackage installs the entire suite of Bacula applications: job
+ scheduling, storage control, node connector, and administrative console.
+
+Package: bacula-common
+Replaces: bacula-director-common
+Architecture: any
+Pre-Depends: adduser
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Suggests: bacula-doc
+Description: network backup service - common support files
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides files that are useful for other Bacula packages.
+
+Package: bacula-common-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-common (= ${binary:Version}), ${misc:Depends}
+Description: network backup service - common support files (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-common.
+
+Package: bacula-common-sqlite3
+Architecture: any
+Depends: bacula-common, ${shlibs:Depends}, ${misc:Depends}
+Suggests: bacula-doc
+Conflicts: bacula-common-pgsql, bacula-common-mysql
+Description: network backup service - SQLite v3 common files
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides files that are useful for other Bacula packages
+ for the SQLite v3 database.
+
+Package: bacula-common-sqlite3-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-common-sqlite3 (= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-common-pgsql-dbg, bacula-common-mysql-dbg
+Description: network backup service - SQLite v3 common files (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-common-sqlite3.
+
+Package: bacula-common-pgsql
+Architecture: any
+Depends: bacula-common, ${shlibs:Depends}, ${misc:Depends}
+Suggests: bacula-doc
+Conflicts: bacula-common-sqlite3, bacula-common-mysql
+Description: network backup service - PostgreSQL common files
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides files that are useful for other Bacula packages
+ for the PostgreSQL database.
+
+Package: bacula-common-pgsql-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-common-pgsql (= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-common-sqlite3-dbg, bacula-common-mysql-dbg
+Description: network backup service - PostgreSQL common files (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-common-pgsql.
+
+Package: bacula-common-mysql
+Architecture: any
+Depends: bacula-common, ${shlibs:Depends}, ${misc:Depends}
+Suggests: bacula-doc
+Conflicts: bacula-common-sqlite3, bacula-common-pgsql
+Description: network backup service - MySQL common files
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides files that are useful for other Bacula packages
+ for the MySQL database.
+
+Package: bacula-common-mysql-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-common-mysql (= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-common-sqlite3-dbg, bacula-common-pgsql-dbg
+Description: network backup service - MySQL common files (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-common-mysql.
+
+Package: bacula-director-common
+Architecture: any
+Depends: bacula-common (= ${binary:Version}), bsd-mailx | mailx, lsb-base,
+ ${shlibs:Depends}, ${misc:Depends}
+Description: network backup service - Director common files
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The Bacula Director service supervises all the backup, restore, verify, and
+ archive operations. It can run as a daemon or as a foreground service which
+ administrators can use to schedule backups and recover files.
+ .
+ This package provides common files for the Bacula Director daemon.
+
+Package: bacula-director-common-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-director-common (= ${binary:Version}), ${misc:Depends}
+Description: network backup service - Director common files (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-director-common.
+
+Package: bacula-director-sqlite3
+Architecture: any
+Depends: bacula-director-common (= ${binary:Version}), bacula-common-sqlite3
+ (>= ${binary:Version}), sqlite3, file, dbconfig-common, ucf,
+ ${shlibs:Depends}, ${misc:Depends}
+Conflicts: bacula-director
+Provides: bacula-director
+Replaces: bacula-director
+Suggests: gawk
+Description: network backup service - SQLite 3 storage for Director
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The Bacula Director service supervises all the backup, restore, verify, and
+ archive operations. It can run as a daemon or as a foreground service which
+ administrators can use to schedule backups and recover files.
+ .
+ This package stores Bacula's catalog in an SQLite 3 database, and thus is
+ suitable for smaller installations.
+ 
+Package: bacula-director-sqlite3-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-director-sqlite3 (= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-director-dbg
+Provides: bacula-director-dbg
+Replaces: bacula-director-dbg
+Description: network backup service - SQLite 3 storage for Director (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides the debugging symbols for bacula-director-sqlite3.
+
+Package: bacula-director-mysql
+Architecture: any
+Depends: bacula-director-common (= ${binary:Version}), bacula-common-mysql
+ (>= ${binary:Version}), dbconfig-common, mysql-client, ucf,
+ ${shlibs:Depends}, ${misc:Depends}
+Conflicts: bacula-director
+Provides: bacula-director
+Replaces: bacula-director
+Recommends: mysql-server
+Suggests: gawk
+Description: network backup service - MySQL storage for Director
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The Bacula Director service supervises all the backup, restore, verify, and
+ archive operations. It can run as a daemon or as a foreground service which
+ administrators can use to schedule backups and recover files.
+ .
+ This package stores Bacula's catalog in a MySQL database, and thus is
+ suitable for large installations.
+
+Package: bacula-director-mysql-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-director-mysql (= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-director-dbg
+Provides: bacula-director-dbg
+Replaces: bacula-director-dbg
+Description: network backup service - MySQL storage for Director (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides the debugging symbols for bacula-director-mysql.
+
+Package: bacula-director-pgsql
+Architecture: any
+Depends: bacula-director-common (= ${binary:Version}), bacula-common-pgsql
+ (>= ${binary:Version}), dbconfig-common, postgresql-client (>= 7.4), ucf,
+ ${shlibs:Depends}, ${misc:Depends}
+Conflicts: bacula-director
+Provides: bacula-director
+Replaces: bacula-director
+Recommends: postgresql (>= 7.4)
+Suggests: gawk, postgresql-contrib, postgresql-doc
+Description: network backup service - PostgreSQL storage for Director
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The Bacula Director service supervises all the backup, restore, verify, and
+ archive operations. It can run as a daemon or as a foreground service which
+ administrators can use to schedule backups and recover files.
+ .
+ This package stores Bacula's catalog in a PostgreSQL database, and thus is
+ suited for large installations.
+
+Package: bacula-director-pgsql-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-director-pgsql (= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-director-dbg
+Provides: bacula-director-dbg
+Replaces: bacula-director-dbg
+Description: network backup service - PostgreSQL storage for Director (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides the debugging symbols for bacula-director-pgsql.
+
+Package: bacula-client
+Architecture: all
+Depends: bacula-console (>= ${source:Version}), bacula-fd
+ (>= ${source:Version}), ${misc:Depends}
+Recommends: bacula-traymonitor
+Description: network backup service - client metapackage
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The Bacula Director service supervises all the backup, restore, verify, and
+ archive operations. It can run as a daemon or as a foreground service which
+ administrators can use to schedule backups and recover files.
+ .
+ The package is a metapackage for client installations (file daemon and
+ console only).
+
+Package: bacula-fd
+Architecture: any
+Depends: bacula-common (= ${binary:Version}), lsb-base, ucf, ${shlibs:Depends},
+ ${misc:Depends}
+Suggests: bacula-traymonitor
+Description: network backup service - file daemon
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The file daemon has to be installed on the machine to be backed up. It is
+ responsible for providing the file attributes and data when requested by
+ the Director, and also for the file system-dependent part of restoration.
+
+Package: bacula-fd-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-fd (= ${binary:Version}), ${misc:Depends}
+Description: network backup service - file daemon (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package contains the debugging symbols for bacula-fd.
+
+Package: bacula-server
+Architecture: all
+Depends: bacula-director-sqlite3 (>= ${source:Version}) | bacula-director,
+ bacula-sd (>= ${source:Version}), bacula-sd-sqlite3 (>= ${source:Version}) |
+ bacula-sd-tools, ${misc:Depends}
+Recommends: bacula-fd
+Description: network backup service - server metapackage
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This metapackage provides a standard server install, consisting of the
+ director and storage daemons.
+
+Package: bacula-sd
+Architecture: any
+Depends: bacula-common (= ${binary:Version}), mtx, python, lsb-base, ucf,
+ ${shlibs:Depends}, ${misc:Depends}
+Recommends: mt-st, bacula-sd-sqlite3 (>= ${source:Version}) | bacula-sd-tools
+Suggests: dds2tar, scsitools, sg3-utils
+Description: network backup service - storage daemon
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The storage daemon performs the storage and recovery of the file
+ attributes and data to the physical media; in other words, it is
+ responsible for reading and writing the backups.
+ .
+ It runs on the machine which has access to the backup device(s) - usually
+ a tape drive, but alternatively other storage media, such as files.
+
+Package: bacula-sd-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: ${misc:Depends}, bacula-sd (= ${binary:Version})
+Description: network backup service - storage daemon (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-sd.
+
+Package: bacula-sd-sqlite3
+Architecture: any
+Depends: bacula-sd (= ${binary:Version}), ${shlibs:Depends},
+ bacula-common-sqlite3 (>= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-sd-tools
+Replaces: bacula-sd-tools
+Provides: bacula-sd-tools
+Description: network backup service - SQLite 3 SD tools
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The storage daemon performs the storage and recovery of the file
+ attributes and data to the physical media; in other words, it is
+ responsible for reading and writing the backups.
+ .
+ This package contains SQLite 3 versions of the bscan and bcopy utilities,
+ which are used for recovery when Bacula's catalog is unavailable.
+
+Package: bacula-sd-sqlite3-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-sd-sqlite3 (= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-sd-tools-dbg
+Replaces: bacula-sd-tools-dbg
+Provides: bacula-sd-tools-dbg
+Description: network backup service - SQLite 3 SD tools (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-sd-sqlite3.
+
+Package: bacula-sd-mysql
+Architecture: any
+Depends: bacula-sd (= ${binary:Version}), bacula-common-mysql
+ (>= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Conflicts: bacula-sd-tools
+Replaces: bacula-sd-tools
+Provides: bacula-sd-tools
+Description: network backup service - MySQL SD tools
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The storage daemon performs the storage and recovery of the file
+ attributes and data to the physical media; in other words, it is
+ responsible for reading and writing the backups.
+ .
+ This package contains MySQL versions of the bscan and bcopy utilities,
+ which are used for recovery when Bacula's catalog is unavailable.
+
+Package: bacula-sd-mysql-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-sd-mysql (= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-sd-tools-dbg
+Replaces: bacula-sd-tools-dbg
+Provides: bacula-sd-tools-dbg
+Description: network backup service - MySQL SD tools (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-sd-mysql.
+
+Package: bacula-sd-pgsql
+Architecture: any
+Depends: bacula-sd (= ${binary:Version}), bacula-common-pgsql
+ (>= ${binary:Version}), ${shlibs:Depends}, ${misc:Depends}
+Conflicts: bacula-sd-tools
+Replaces: bacula-sd-tools
+Provides: bacula-sd-tools
+Description: network backup service - PostgreSQL SD tools
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The storage daemon performs the storage and recovery of the file
+ attributes and data to the physical media; in other words, it is
+ responsible for reading and writing the backups.
+ .
+ This package contains PostgreSQL versions of the bscan and bcopy utilities,
+ which are used for recovery when Bacula's catalog is unavailable.
+
+Package: bacula-sd-pgsql-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-sd-pgsql (= ${binary:Version}), ${misc:Depends}
+Conflicts: bacula-sd-tools-dbg
+Replaces: bacula-sd-tools-dbg
+Provides: bacula-sd-tools-dbg
+Description: network backup service - PostgreSQL SD tools (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-sd-pgsql.
+
+Package: bacula-console
+Architecture: any
+Depends: bacula-common (= ${binary:Version}), ${shlibs:Depends},
+ ${misc:Depends}
+Description: network backup service - text console
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The management console allows the administrator or user to
+ communicate with the Bacula Director.
+ .
+ This package provides the text-interface version of the console.
+
+Package: bacula-console-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-console (= ${binary:Version}), ${misc:Depends}
+Description: network backup service - text console (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-console.
+
+Package: bacula-console-qt
+Section: utils
+Architecture: any
+Depends: bacula-common (= ${binary:Version}), ${shlibs:Depends},
+ ${misc:Depends}
+Description: network backup service - Bacula Administration Tool
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ The management console allows the administrator or user to
+ communicate with the Bacula Director.
+ .
+ This package provides the most advanced GUI to Bacula: the Bacula
+ Administration Tool (BAT) console.
+ .
+ This GUI interface has been designed to ease restore operations as much as
+ possible as compared to the basic text console.
+
+Package: bacula-console-qt-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-console-qt (= ${binary:Version}), ${misc:Depends}
+Description: network backup service - Bacula Administration Tool (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-console-qt.
+
+Package: bacula-traymonitor
+Architecture: any
+Depends: ${shlibs:Depends}, bacula-common (= ${binary:Version}),
+ ${misc:Depends}
+Suggests: kde | gnome-desktop-environment
+Description: network backup service - tray monitor
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides a tray monitor for the Bacula backup system,
+ which constantly displays Bacula's status. It is FreeDesktop-compatible,
+ so it will work under both KDE and GNOME.
+
+Package: bacula-traymonitor-dbg
+Section: debug
+Priority: extra
+Architecture: any
+Depends: bacula-traymonitor (= ${binary:Version}), ${misc:Depends}
+Description: network backup service - tray monitor (debugging)
+ Bacula is a set of programs to manage backup, recovery, and verification of
+ data across a network of computers of different kinds.
+ .
+ This package provides debugging symbols for bacula-traymonitor.

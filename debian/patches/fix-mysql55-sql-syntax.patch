@@ -1,0 +1,20 @@
+Description: fix unnecessary escaping
+ Since we use this code directly by dbconfig, not from sh-script as upstream,
+ there is no need to escape symbols.
+Author: Scott Moser <smoser@ubuntu.com>
+Reviewed-by: Alexander Golovko <alexandro@ankalagon.ru>
+Last-Modified: 2012-06-03
+
+--- a/src/cats/make_mysql_tables.in
++++ b/src/cats/make_mysql_tables.in
+@@ -356,8 +356,8 @@ CREATE TABLE UnsavedFiles (
+ 
+ CREATE TABLE Counters (
+    Counter TINYBLOB NOT NULL,
+-   \`MinValue\` INTEGER DEFAULT 0,
+-   \`MaxValue\` INTEGER DEFAULT 0,
++   `MinValue` INTEGER DEFAULT 0,
++   `MaxValue` INTEGER DEFAULT 0,
+    CurrentValue INTEGER DEFAULT 0,
+    WrapCounter TINYBLOB NOT NULL,
+    PRIMARY KEY (Counter(128))

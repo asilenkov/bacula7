@@ -1,0 +1,1488 @@
+# Dutch translation of Bacula
+# Copyright (C) 2012-2014 Kern Sibbald
+# This file is distributed under the same license as the PACKAGE package.
+# W. van den Akker <wvdakker@wilsoft.nl>, 2012
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Bacula 5.2.7\n"
+"Report-Msgid-Bugs-To: bacula-devel@lists.sourceforge.net\n"
+"POT-Creation-Date: 2014-07-29 18:18+0200\n"
+"PO-Revision-Date: 2012-05-05 11:52+0100\n"
+"Last-Translator: W. van den Akker <wvdakker@wilsoft.nl>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: src/baconfig.h:60 src/baconfig.h:61 src/baconfig.h:66 src/baconfig.h:67
+#, c-format
+msgid "Failed ASSERT: %s\n"
+msgstr ""
+
+#: src/baconfig.h:76
+msgid "*None*"
+msgstr "*Geen*"
+
+#: src/lib/status.h:73
+msgid ""
+"\n"
+"Terminated Jobs:\n"
+msgstr ""
+
+#: src/lib/status.h:80
+msgid " JobId  Level    Files      Bytes   Status   Finished        Name \n"
+msgstr ""
+
+#: src/lib/status.h:82
+msgid "===================================================================\n"
+msgstr ""
+
+#: src/lib/status.h:102
+msgid "Created"
+msgstr ""
+
+#: src/lib/status.h:106
+msgid "Error"
+msgstr ""
+
+#: src/lib/status.h:109
+msgid "Diffs"
+msgstr ""
+
+#: src/lib/status.h:112
+msgid "Cancel"
+msgstr ""
+
+#: src/lib/status.h:115
+msgid "OK"
+msgstr ""
+
+#: src/lib/status.h:118
+msgid "OK -- with warnings"
+msgstr ""
+
+#: src/lib/status.h:122
+msgid "Other"
+msgstr ""
+
+#: src/lib/status.h:134
+#, c-format
+msgid "%6d\t%-6s\t%8s\t%10s\t%-7s\t%-8s\t%s\n"
+msgstr ""
+
+#: src/lib/status.h:142
+#, c-format
+msgid "%6d  %-6s %8s %10s  %-7s  %-8s %s\n"
+msgstr ""
+
+#: src/lib/status.h:171 src/lib/status.h:182 src/lib/status.h:196
+#: src/lib/status.h:200 src/lib/status.h:204
+msgid "Bacula "
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:130
+#, c-format
+msgid "No record for %d %s\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:139
+#, c-format
+msgid "Director: name=%s address=%s DIRport=%d\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:143
+#, c-format
+msgid "Console: name=%s\n"
+msgstr "Console: naam=%s\n"
+
+#: src/qt-console/bat_conf.cpp:146
+#: src/qt-console/tray-monitor/tray_conf.cpp:183
+#, c-format
+msgid "ConsoleFont: name=%s font face=%s\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:150 src/qt-console/bat_conf.cpp:231
+#: src/qt-console/bat_conf.cpp:279 src/qt-console/bat_conf.cpp:309
+#, c-format
+msgid "Unknown resource type %d\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:257
+#: src/qt-console/tray-monitor/tray_conf.cpp:276
+#, c-format
+msgid "%s item is required in %s resource, but not found.\n"
+msgstr ""
+
+#: src/qt-console/bat_conf.cpp:326
+#: src/qt-console/tray-monitor/tray_conf.cpp:360
+#, c-format
+msgid "Attempt to define second %s resource named \"%s\" is not permitted.\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:85
+#, c-format
+msgid "Already connected\"%s\".\n"
+msgstr "Al verbonden\"%s\".\n"
+
+#: src/qt-console/bcomm/dircomm.cpp:96
+#: src/qt-console/tray-monitor/tray-monitor.cpp:347
+#, c-format
+msgid "Connecting to Director %s:%d"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:98
+#, c-format
+msgid ""
+"Connecting to Director %s:%d\n"
+"\n"
+msgstr ""
+"Verbinden met Director %s:%d\n"
+"\n"
+
+#: src/qt-console/bcomm/dircomm.cpp:150
+#, c-format
+msgid "Failed to initialize TLS context for Console \"%s\".\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:173
+#, c-format
+msgid "Failed to initialize TLS context for Director \"%s\".\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:195
+#: src/qt-console/tray-monitor/tray-monitor.cpp:352
+msgid "Director daemon"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm.cpp:233
+msgid "Initializing ..."
+msgstr "Initialiseren ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:249 src/qt-console/console/console.cpp:130
+msgid "Connected"
+msgstr "Verbonden"
+
+#: src/qt-console/bcomm/dircomm.cpp:373
+msgid "Command completed ..."
+msgstr "Opdracht gereed ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:380 src/qt-console/console/console.cpp:367
+msgid "Processing command ..."
+msgstr "Opdracht aan het uitvoeren ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:387
+msgid "At main prompt waiting for input ..."
+msgstr "Wacht op invoer op opdrachtregel in hoofdscherm ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:394 src/qt-console/bcomm/dircomm.cpp:407
+msgid "At prompt waiting for input ..."
+msgstr "Wacht op invoer op opdrachtregel ..."
+
+#: src/qt-console/bcomm/dircomm.cpp:415
+msgid "Command failed."
+msgstr "Opdracht mislukt."
+
+#: src/qt-console/bcomm/dircomm.cpp:487
+msgid "Director disconnected."
+msgstr "Director niet verbonden."
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:107
+#, c-format
+msgid "Director authorization problem at \"%s:%d\"\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:114
+#, c-format
+msgid ""
+"Authorization problem: Remote server at \"%s:%d\" did not advertise required "
+"TLS support.\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:122
+#, c-format
+msgid ""
+"Authorization problem with Director at \"%s:%d\": Remote server requires "
+"TLS.\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:133
+#, c-format
+msgid "TLS negotiation failed with Director at \"%s:%d\"\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:145
+#, c-format
+msgid ""
+"Bad response to Hello command: ERR=%s\n"
+"The Director at \"%s:%d\" is probably not running.\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:154
+#, c-format
+msgid "Director at \"%s:%d\" rejected Hello command\n"
+msgstr ""
+
+#: src/qt-console/bcomm/dircomm_auth.cpp:169
+#, c-format
+msgid ""
+"Authorization problem with Director at \"%s:%d\"\n"
+"Most likely the passwords do not agree.\n"
+"If you are using TLS, there may have been a certificate validation error "
+"during the TLS handshake.\n"
+"Please see "
+msgstr ""
+
+#: src/qt-console/main.cpp:154
+msgid "Cryptography library initialization failed.\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:158
+#, c-format
+msgid "Please correct configuration file: %s\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:180
+#, c-format
+msgid ""
+"\n"
+"Version: %s (%s) %s %s %s\n"
+"\n"
+"Usage: bat [-s] [-c config_file] [-d debug_level] [config_file]\n"
+"       -c <file>   set configuration file to file\n"
+"       -dnn        set debug level to nn\n"
+"       -s          no signals\n"
+"       -t          test - read configuration and exit\n"
+"       -?          print this message.\n"
+"\n"
+msgstr ""
+"\n"
+"Versie: %s (%s) %s %s %s\n"
+"\n"
+"Specificatie: bat [-s] [-c configuratiebestand] [-d debug_level] "
+"[configuratiebestand]\n"
+"       -c <file>     gebruik configuratiebestand\n"
+"       -d <nn>       instellen debug level op <nn>\n"
+"       -s          geen signaleringen\n"
+"       -t            test - lees configuratie en stop\n"
+"       -?            geef deze melding.\n"
+"\n"
+
+#: src/qt-console/main.cpp:213 src/qt-console/main.cpp:243
+msgid "TLS required but not configured in Bacula.\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:221
+#, c-format
+msgid ""
+"Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined for "
+"Director \"%s\" in %s. At least one CA certificate store is required.\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:230
+#, c-format
+msgid ""
+"No Director resource defined in %s\n"
+"Without that I don't how to speak to the Director :-(\n"
+msgstr ""
+
+#: src/qt-console/main.cpp:251
+#, c-format
+msgid ""
+"Neither \"TLS CA Certificate\" or \"TLS CA Certificate Dir\" are defined for "
+"Console \"%s\" in %s.\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:75
+msgid ""
+"Director authorization problem.\n"
+"Most likely the passwords do not agree.\n"
+"Please see "
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:84
+#, c-format
+msgid "Bad response to Hello command: ERR=%s\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:91
+msgid "Director rejected Hello command\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:119
+#, c-format
+msgid "Error sending Hello to Storage daemon. ERR=%s\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:125
+msgid ""
+"Director and Storage daemon passwords or names not the same.\n"
+"Please see "
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:132
+#, c-format
+msgid "bdird<stored: bad response to Hello command: ERR=%s\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:139
+msgid "Storage daemon rejected Hello command\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:165
+#, c-format
+msgid "Error sending Hello to File daemon. ERR=%s\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:171
+msgid ""
+"Director and File daemon passwords or names not the same.\n"
+"Please see "
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:178
+#, c-format
+msgid "Bad response from File daemon to Hello command: ERR=%s\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/authenticate.cpp:185
+msgid "File daemon rejected Hello command\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:55
+#, c-format
+msgid ""
+"\n"
+"Version: %s (%s) %s %s %s\n"
+"\n"
+"Usage: tray-monitor [-c config_file] [-d debug_level]\n"
+"       -c <file>     set configuration file to file\n"
+"       -d <nn>       set debug level to <nn>\n"
+"       -dt           print timestamp in debug output\n"
+"       -t            test - read configuration and exit\n"
+"       -?            print this message.\n"
+"\n"
+msgstr ""
+"\n"
+"Versie: %s (%s) %s %s %s\n"
+"\n"
+"Specificatie: tray-monitor [-c configuratiebestand] [-d debug_level]\n"
+"       -c <file>     gebruik configuratiebestand\n"
+"       -d <nn>       instellen debug level op <nn>\n"
+"       -dt           weergeven tijd in debug output\n"
+"       -t            test - lees configuratie en stop\n"
+"       -?            geef deze melding.\n"
+"\n"
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:204
+#, c-format
+msgid ""
+"Error: %d Monitor resources defined in %s. You must define one and only one "
+"Monitor resource.\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:236
+#, c-format
+msgid ""
+"No Client, Storage or Director resource defined in %s\n"
+"Without that I don't how to get status from the File, Storage or Director "
+"Daemon :-(\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:251
+#, c-format
+msgid ""
+"Invalid refresh interval defined in %s\n"
+"This value must be greater or equal to 1 second and less or equal to 10 "
+"minutes (read value: %d).\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:319
+#, c-format
+msgid "Error, currentitem is not a Client or a Storage..\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:357
+#, c-format
+msgid "Connecting to Client %s:%d"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:362
+msgid "File daemon"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:367
+#, c-format
+msgid "Connecting to Storage %s:%d"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:372
+msgid "Storage daemon"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:376
+#: src/qt-console/tray-monitor/tray-monitor.cpp:406
+#, c-format
+msgid "Error, currentitem is not a Client, a Storage or a Director..\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:381
+msgid "Cannot connect to daemon."
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:390
+#, c-format
+msgid "Authentication error : %s"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:397
+msgid "Opened connection with Director daemon."
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:400
+msgid "Opened connection with File daemon."
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:403
+msgid "Opened connection with Storage daemon."
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:454
+msgid "Error : BNET_HARDEOF or BNET_ERROR"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray-monitor.cpp:463
+msgid "Error : Connection closed."
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:156
+#, c-format
+msgid "No %s resource defined\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:165
+#, c-format
+msgid "Monitor: name=%s FDtimeout=%s SDtimeout=%s\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:171
+#, c-format
+msgid "Director: name=%s address=%s FDport=%d\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:175
+#, c-format
+msgid "Client: name=%s address=%s FDport=%d\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:179
+#, c-format
+msgid "Storage: name=%s address=%s SDport=%d\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:187
+#, c-format
+msgid "Unknown resource type %d in dump_resource.\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:245
+#, c-format
+msgid "Unknown resource type %d in free_resource.\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:282
+#, c-format
+msgid "Too many items in %s resource\n"
+msgstr ""
+
+#: src/qt-console/tray-monitor/tray_conf.cpp:302
+#: src/qt-console/tray-monitor/tray_conf.cpp:340
+#, c-format
+msgid "Unknown resource type %d in save_resource.\n"
+msgstr ""
+
+#~ msgid ""
+#~ "Copyright (C) 2005 Christian Masopust\n"
+#~ "Written by Christian Masopust (2005)\n"
+#~ "\n"
+#~ "Version: "
+#~ msgstr ""
+#~ "Copyright (C) 2005 Christian Masopust\n"
+#~ "Gemaakt door Christian Masopust (2005)\n"
+#~ "\n"
+#~ "Versie: "
+
+#, fuzzy
+#~ msgid "Could not init database batch connection\n"
+#~ msgstr "Data parser kon niet geregistreerd worden!"
+
+#~ msgid "*** Admin Error ***"
+#~ msgstr "*** Admin Fout ***"
+
+#~ msgid "Admin Canceled"
+#~ msgstr "Admin geannuleerd"
+
+#~ msgid "Backup OK -- with warnings"
+#~ msgstr "Backup OK -- met waarschuwingen"
+
+#~ msgid "*** Backup Error ***"
+#~ msgstr "*** Backup Fout ***"
+
+#~ msgid "Backup Canceled"
+#~ msgstr "Backup geannuleerd"
+
+#~ msgid "Error writing bsr file.\n"
+#~ msgstr "Fout bij schrijven van bsr bestand.\n"
+
+#~ msgid "No Volumes found to restore.\n"
+#~ msgstr "Geen Volumes gevonden om terug te zetten.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Volumes marked with \"*\" are in the Autochanger.\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Volumes gemarkeerd met \"*\" staan online.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "Version: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bacula-dir [-f -s] [-c config_file] [-d debug_level] "
+#~ "[config_file]\n"
+#~ "       -c <file>   set configuration file to file\n"
+#~ "       -d <nn>     set debug level to <nn>\n"
+#~ "       -dt         print timestamp in debug output\n"
+#~ "       -f          run in foreground (for debugging)\n"
+#~ "       -g          groupid\n"
+#~ "       -m          print kaboom output (for debugging)\n"
+#~ "       -r <job>    run <job> now\n"
+#~ "       -s          no signals\n"
+#~ "       -t          test - read configuration and exit\n"
+#~ "       -u          userid\n"
+#~ "       -v          verbose user messages\n"
+#~ "       -?          print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Versie: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Specificatie: tray-monitor [-c configuratiebestand] [-d debug_level]\n"
+#~ "       -c <file>     gebruik configuratiebestand\n"
+#~ "       -d <nn>       instellen debug level op <nn>\n"
+#~ "       -dt           weergeven tijd in debug output\n"
+#~ "       -t            test - lees configuratie en stop\n"
+#~ "       -?            geef deze melding.\n"
+#~ "\n"
+
+#~ msgid "Job"
+#~ msgstr "Job"
+
+#~ msgid "Unable to init job cond variable: ERR=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Failed to select Storage daemon.\n"
+#~ msgstr "Kan de geselecteerde opslag niet vinden."
+
+#, fuzzy
+#~ msgid "canceled"
+#~ msgstr "Backup geannuleerd"
+
+#, fuzzy
+#~ msgid "Job's NextPool resource"
+#~ msgstr "Selecteer Pool"
+
+#, fuzzy
+#~ msgid "Storage from Job's NextPool resource"
+#~ msgstr "Selecteer Pool"
+
+#~ msgid "Job %s waiting %d seconds for scheduled start time.\n"
+#~ msgstr "Job %s wacht %d seconde voor de start tijd.\n"
+
+#~ msgid "Rescheduled Job %s at %s to re-run in %d seconds (%s).\n"
+#~ msgstr ""
+#~ "Opnieuw ingeplande Job %s in %s start opnieuw in %d seconden (%s).\n"
+
+#~ msgid "previous Job"
+#~ msgstr "vorige Job"
+
+#~ msgid ""
+#~ "Job canceled. Attempt to read and write same device.\n"
+#~ "    Read storage \"%s\" (From %s) -- Write storage \"%s\" (From %s)\n"
+#~ msgstr ""
+#~ "Job geannuleerd. Er wordt van hetzelfde device gelezen en naar "
+#~ "geschreven.\n"
+#~ "   Lezen van opslag \"%s\" (Van %s) -- Schrijven naar opslag \"%s\" (Van "
+#~ "%s)\n"
+
+#~ msgid "Illegal character in Volume name \"%s\"\n"
+#~ msgstr "Onjuist karakter in Volume naam \"%s\"\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "Created new Volume=\"%s\", Pool=\"%s\", MediaType=\"%s\" in catalog.\n"
+#~ msgstr "Nieuw volume \"%s\" aangemaakt in catalogus.\n"
+
+#~ msgid ""
+#~ "Wanted to create Volume \"%s\", but it already exists. Trying again.\n"
+#~ msgstr ""
+#~ "Geprobeerd om \"%s\" aan te maken, maar deze bestaat al. Probeer "
+#~ "opnieuw.\n"
+
+#~ msgid "Too many failures. Giving up creating Volume name.\n"
+#~ msgstr "Teveel mislukte pogingen. Aanmaken volume naam gestopt.\n"
+
+#, fuzzy
+#~ msgid "Stop a job"
+#~ msgstr "Uitvoeren herstel opdracht"
+
+#, fuzzy
+#~ msgid "Failed to set bandwidth limit to Client.\n"
+#~ msgstr "Kan de geselecteerde client niet vinden."
+
+#~ msgid "Job \"%s\" not found.\n"
+#~ msgstr "Job \"%s\" niet gevonden.\n"
+
+#~ msgid "Storage"
+#~ msgstr "Opslag"
+
+#~ msgid "Client"
+#~ msgstr "Client"
+
+#~ msgid "Could not find a Catalog resource\n"
+#~ msgstr "Kan Catalog medium niet vinden\n"
+
+#, fuzzy
+#~ msgid "Unable to get Job record for Job=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get last Job record for Job=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get Client record for Client=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to get last Job record for Client=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#~ msgid "The defined FileSet resources are:\n"
+#~ msgstr "De gedefinieerde Fileset media zijn:\n"
+
+#~ msgid "Select FileSet resource"
+#~ msgstr "Selecteer FileSet bron"
+
+#, fuzzy
+#~ msgid "NextPool \"%s\" not found.\n"
+#~ msgstr "Job \"%s\" niet gevonden.\n"
+
+#, fuzzy
+#~ msgid "No authorization. NextPool \"%s\".\n"
+#~ msgstr "Geen toegang tot Pool \"%s\"\n"
+
+#, fuzzy
+#~ msgid "Enter the JobId list to select: "
+#~ msgstr "Voer de gekozen Job in:"
+
+#~ msgid "You have the following choices:\n"
+#~ msgstr "U heeft de volgende keuzes:\n"
+
+#~ msgid "Pool"
+#~ msgstr "Pool"
+
+#, fuzzy
+#~ msgid "NextPool"
+#~ msgstr "Pool"
+
+#, fuzzy
+#~ msgid "Command input"
+#~ msgstr "Onjuiste opdrachtregel optie"
+
+#~ msgid "The current %s retention period is: %s\n"
+#~ msgstr "De huidige %s retention periode: %s\n"
+
+#~ msgid "Continue? (yes/mod/no): "
+#~ msgstr "Doorgaan? (ja, wijz, nee):"
+
+#~ msgid "Enter new retention period: "
+#~ msgstr "Geef nieuwe retention periode:"
+
+#~ msgid "Invalid period.\n"
+#~ msgstr "Onjuiste periode.\n"
+
+#~ msgid "The defined Storage resources are:\n"
+#~ msgstr "De gedefinieerde Opslag media zijn:\n"
+
+#~ msgid "Select Storage resource"
+#~ msgstr "Selecteer opslag medium"
+
+#~ msgid ""
+#~ "You must specify a \"use <catalog-name>\" command before continuing.\n"
+#~ msgstr ""
+#~ "U diente een \"use <catalog-name>\" te specificeren alvorens te kunnen "
+#~ "doorgaan.\n"
+
+#~ msgid "The defined Catalog resources are:\n"
+#~ msgstr "De gedefinieerde Catalog media zijn:\n"
+
+#~ msgid "Select Catalog resource"
+#~ msgstr "Selecteer Catalog media"
+
+#~ msgid "The defined Job resources are:\n"
+#~ msgstr "De gedefinieerde job resources zijn:\n"
+
+#~ msgid "Select Job resource"
+#~ msgstr "Selecteer Job media:"
+
+#~ msgid "Select Restore Job"
+#~ msgstr "Selecteer Job om terug te zetten"
+
+#~ msgid "The defined Client resources are:\n"
+#~ msgstr "De gedefinieerde Clients zijn:\n"
+
+#~ msgid "Select Client (File daemon) resource"
+#~ msgstr "Selecteer een Client (File daemon)"
+
+#~ msgid "Error: Client resource %s does not exist.\n"
+#~ msgstr "Fout: Client %s bestaat niet.\n"
+
+#~ msgid "Could not find Client %s: ERR=%s"
+#~ msgstr "Kan Client niet vinden %s: ERR=%s"
+
+#~ msgid "Could not find Client \"%s\": ERR=%s"
+#~ msgstr "Kan Client niet vinden \"%s\": ERR=%s"
+
+#~ msgid "Defined Clients:\n"
+#~ msgstr "Gedefinieerde Clients:\n"
+
+#~ msgid "Select the Client"
+#~ msgstr "Selecteer Client"
+
+#~ msgid "Defined Pools:\n"
+#~ msgstr "Gedefinieerde Pools:\n"
+
+#~ msgid "Select the Pool"
+#~ msgstr "Selecteer Pool"
+
+#~ msgid "No access to Pool \"%s\"\n"
+#~ msgstr "Geen toegang tot Pool \"%s\"\n"
+
+#~ msgid "Enter *MediaId or Volume name: "
+#~ msgstr "Voer *MediaId of Volume naam in:"
+
+#~ msgid "Select Pool resource"
+#~ msgstr "Selecteer Pool"
+
+#~ msgid "Enter the JobId to select: "
+#~ msgstr "Voer de gekozen Job in:"
+
+#~ msgid "Could not find Job \"%s\": ERR=%s"
+#~ msgstr "Kan Job niet vinden \"%s\": ERR=%s"
+
+#~ msgid "Please enter a number between 1 and %d\n"
+#~ msgstr "Voer een nummer in tussen 1 en %d\n"
+
+#~ msgid "JobId %s is not running.\n"
+#~ msgstr "JobID %s is niet in uitvoering.\n"
+
+#~ msgid "Job \"%s\" is not running.\n"
+#~ msgstr "Job \"%s\" is niet in uitvoering.\n"
+
+#~ msgid "Enter autochanger drive[0]: "
+#~ msgstr "Voer autochanger drive[0] in: "
+
+#~ msgid "Enter autochanger slot: "
+#~ msgstr "Voer autochanger slot in:"
+
+#~ msgid "Media Type"
+#~ msgstr "Type media"
+
+#~ msgid "Select the Media Type"
+#~ msgstr "Selecteer media type"
+
+#~ msgid "No Jobs running.\n"
+#~ msgstr "Geen Jobs in uitvoering.\n"
+
+#~ msgid "None of your jobs are running.\n"
+#~ msgstr "Geen van uw opdrachten zijn in uitvoering.\n"
+
+#, fuzzy
+#~ msgid "Confirm %s of %d Job%s (yes/no): "
+#~ msgstr "Bevestig annulering (yes/no)"
+
+#, fuzzy
+#~ msgid "Select Job(s):\n"
+#~ msgstr "Selecteer Job:\n"
+
+#, fuzzy
+#~ msgid "Choose Job list to %s"
+#~ msgstr "Voer de gekozen Job in:"
+
+#~ msgid "You have messages.\n"
+#~ msgstr "U heeft berichten.\n"
+
+#, fuzzy
+#~ msgid "is waiting for its start time (%s)"
+#~ msgstr "Job %s wacht %d seconde voor de start tijd.\n"
+
+#~ msgid "Verify OK"
+#~ msgstr "Controle OK"
+
+#~ msgid "*** Verify Error ***"
+#~ msgstr "*** Fout bij controleren ***"
+
+#~ msgid "New file: %s\n"
+#~ msgstr "Nieuw bestand: %s\n"
+
+#~ msgid "File not in catalog: %s\n"
+#~ msgstr "Bestand niet in catalog: %s\n"
+
+#~ msgid "      st_ino   differ. Cat: %s File: %s\n"
+#~ msgstr "      st_ino   verschil. Cat: %s Bestand: %s\n"
+
+#~ msgid "      st_mode  differ. Cat: %x File: %x\n"
+#~ msgstr "      st_mode  verschil. Cat: %x Bestand: %x\n"
+
+#~ msgid "      st_nlink differ. Cat: %d File: %d\n"
+#~ msgstr "      st_nlink verschil. Cat: %d Bestand: %d\n"
+
+#~ msgid "      st_uid   differ. Cat: %u File: %u\n"
+#~ msgstr "      st_uid   verschil. Cat: %u Bestand: %u\n"
+
+#~ msgid "      st_gid   differ. Cat: %u File: %u\n"
+#~ msgstr "      st_gid   verschil. Cat: %u Bestand: %u\n"
+
+#~ msgid "      st_size  differ. Cat: %s File: %s\n"
+#~ msgstr "      st_size  verschil. Cat: %s Bestand: %s\n"
+
+#~ msgid "      st_atime differs\n"
+#~ msgstr "      st_atime verschilt\n"
+
+#~ msgid "      st_mtime differs\n"
+#~ msgstr "      st_mtime verschilt\n"
+
+#~ msgid "      st_ctime differs\n"
+#~ msgstr "      st_ctime verschilt\n"
+
+#~ msgid "File: %s\n"
+#~ msgstr "Bestand: %s\n"
+
+#, fuzzy
+#~ msgid "pioctl VIOCGETAL error on file \"%s\": ERR=%s\n"
+#~ msgstr "Lees fout op bestand %s. FOUT=%s\n"
+
+#, fuzzy
+#~ msgid "pioctl VIOCSETAL error on file \"%s\": ERR=%s\n"
+#~ msgstr "Lees fout op bestand %s. FOUT=%s\n"
+
+#~ msgid "Compression LZO error: %d\n"
+#~ msgstr "Compressie LZO fout: %d\n"
+
+#~ msgid "Encryption error\n"
+#~ msgstr "Fout in versleuteling \n"
+
+#~ msgid "Read error on file %s. ERR=%s\n"
+#~ msgstr "Lees fout op bestand %s. FOUT=%s\n"
+
+#~ msgid "Too many errors. JobErrors=%d.\n"
+#~ msgstr "Te veel fouten. OpdrachtFouten=%d.\n"
+
+#, fuzzy
+#~ msgid ""
+#~ "\n"
+#~ "%sVersion: %s (%s)\n"
+#~ "\n"
+#~ "Usage: bacula-fd [-f -s] [-c config_file] [-d debug_level]\n"
+#~ "     -c <file>        use <file> as configuration file\n"
+#~ "     -d <n>[,<tags>]  set debug level to <nn>, debug tags to <tags>\n"
+#~ "     -dt              print a timestamp in debug output\n"
+#~ "     -f               run in foreground (for debugging)\n"
+#~ "     -g               groupid\n"
+#~ "     -k               keep readall capabilities\n"
+#~ "     -m               print kaboom output (for debugging)\n"
+#~ "     -s               no signals (for debugging)\n"
+#~ "     -t               test configuration file and exit\n"
+#~ "     -T               set trace on\n"
+#~ "     -u               userid\n"
+#~ "     -v               verbose user messages\n"
+#~ "     -?               print this message.\n"
+#~ "\n"
+#~ msgstr ""
+#~ "\n"
+#~ "Versie: %s (%s) %s %s %s\n"
+#~ "\n"
+#~ "Specificatie: tray-monitor [-c configuratiebestand] [-d debug_level]\n"
+#~ "       -c <file>     gebruik configuratiebestand\n"
+#~ "       -d <nn>       instellen debug level op <nn>\n"
+#~ "       -dt           weergeven tijd in debug output\n"
+#~ "       -t            test - lees configuratie en stop\n"
+#~ "       -?            geef deze melding.\n"
+#~ "\n"
+
+#, fuzzy
+#~ msgid "Disable Command \"%s\" not found.\n"
+#~ msgstr "Job \"%s\" niet gevonden.\n"
+
+#, fuzzy
+#~ msgid "Command: \"%s\" is disabled.\n"
+#~ msgstr "Opdracht mislukt."
+
+#, fuzzy
+#~ msgid "Failed connect from Storage daemon. SD bsock=NULL.\n"
+#~ msgstr "Kan de geselecteerde opslag niet vinden."
+
+#~ msgid "LZO init failed\n"
+#~ msgstr "Initialiseren LZO mislukt\n"
+
+#~ msgid "Zlib errno"
+#~ msgstr "Zlib foutnr."
+
+#~ msgid "Zlib stream error"
+#~ msgstr "Zlib datastroom fout"
+
+#~ msgid "Zlib data error"
+#~ msgstr "Zlib data fout"
+
+#~ msgid "Zlib memory error"
+#~ msgstr "Zlib geheugen fout"
+
+#~ msgid "Zlib buffer error"
+#~ msgstr "Zlib buffer fout"
+
+#~ msgid "Zlib version error"
+#~ msgstr "Zlib versie fout"
+
+#, fuzzy
+#~ msgid "Restore Object"
+#~ msgstr "Uitvoeren herstel opdracht"
+
+#, fuzzy
+#~ msgid "No addr/port found to listen on.\n"
+#~ msgstr "Geen Volumes gevonden om terug te zetten.\n"
+
+#, fuzzy
+#~ msgid "User cancel requested.\n"
+#~ msgstr "Terugzetten geannuleerd."
+
+#, fuzzy
+#~ msgid "Selection item too large.\n"
+#~ msgstr "Selecteer Pool"
+
+#, fuzzy
+#~ msgid "Job failed or canceled.\n"
+#~ msgstr "Terugzetten geannuleerd.\n"
+
+#, fuzzy
+#~ msgid "Error sending Volume info to Director.\n"
+#~ msgstr "Geen Volumes gevonden om terug te zetten.\n"
+
+#, fuzzy
+#~ msgid "Unable to init spool mutex: ERR=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to init acquire mutex: ERR=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to init read acquire mutex: ERR=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to init volcat mutex: ERR=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to init dcrs mutex: ERR=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Client daemon"
+#~ msgstr "Client"
+
+#, fuzzy
+#~ msgid "Failed to connect to Client daemon: %s:%d\n"
+#~ msgstr "Verbinden met de director mislukt\n"
+
+#, fuzzy
+#~ msgid "Could not open(%s,%s,0640): ERR=%s\n"
+#~ msgstr "Kan Client niet vinden %s: ERR=%s"
+
+#, fuzzy
+#~ msgid "Recv request to Client failed. ERR=%s\n"
+#~ msgstr "Lees fout op bestand %s. FOUT=%s\n"
+
+#, fuzzy
+#~ msgid "Couldn't rewind %s device %s: ERR=%s\n"
+#~ msgstr "Kan Client niet vinden %s: ERR=%s"
+
+#, fuzzy
+#~ msgid "Rewind error on %s device %s: ERR=%s\n"
+#~ msgstr "Lees fout op bestand %s. FOUT=%s\n"
+
+#, fuzzy
+#~ msgid "Truncate error on %s device %s: ERR=%s\n"
+#~ msgstr "Lees fout op bestand %s. FOUT=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to write %s device %s: ERR=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to position to end of data on %s device %s: ERR=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Volume \"%s\" not on %s device %s.\n"
+#~ msgstr "Job \"%s\" niet gevonden.\n"
+
+#, fuzzy
+#~ msgid "Labeled new Volume \"%s\" on %s device %s.\n"
+#~ msgstr "Nieuw volume \"%s\" aangemaakt in catalogus.\n"
+
+#, fuzzy
+#~ msgid "Failed to connect to mailhost %s\n"
+#~ msgstr "Verbinden met de director mislukt\n"
+
+#~ msgid ""
+#~ "Cancel: %s\n"
+#~ "\n"
+#~ "%s"
+#~ msgstr ""
+#~ "Anuleer: %s\n"
+#~ "\n"
+#~ "%s"
+
+#~ msgid "Confirm cancel?"
+#~ msgstr "Bevestig annulering?"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "Bacula ERROR: "
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "Bacula FOUT: "
+
+#~ msgid "KERNEL32.DLL not found: Bacula service not started"
+#~ msgstr "KERNEL32.DLL niet gevonden. Bacula service niet gestart"
+
+#~ msgid "Unable to install the service"
+#~ msgstr "Kan de service niet installeren"
+
+#~ msgid "Service command length too long"
+#~ msgstr "Lengte service commando te lang"
+
+#~ msgid "Service command length too long. Service not registered."
+#~ msgstr "Lengte service commando te lang. Service niet geregistreerd"
+
+#~ msgid "The Bacula service: "
+#~ msgstr "De Bacula service:"
+
+#~ msgid "Cannot add Bacula key to System Registry"
+#~ msgstr "Kan Bacula sleutel niet aan Systeem Register toevoegen"
+
+#~ msgid "The "
+#~ msgstr "De"
+
+#~ msgid "An existing Bacula service: "
+#~ msgstr "Een bestaande Bacula service:"
+
+#~ msgid "Bacula could not be contacted, probably not running"
+#~ msgstr "Bacula kan niet worden bereikt, waarschijnlijk niet opgestart"
+
+#~ msgid "The Bacula service has been removed"
+#~ msgstr "De Bacula service is verwijderd"
+
+#~ msgid ""
+#~ "\n"
+#~ "\n"
+#~ "%s error: %ld at %s:%d"
+#~ msgstr ""
+#~ "\n"
+#~ "\n"
+#~ "%s fout: %ld op %s:%d"
+
+#, fuzzy
+#~ msgid "Config file editor"
+#~ msgstr "Configuratiebestand"
+
+#~ msgid "Save and close"
+#~ msgstr "Opslaan en afsluiten"
+
+#, fuzzy
+#~ msgid "Unable to write to %s\n"
+#~ msgstr "Kan de service niet installeren"
+
+#, fuzzy
+#~ msgid "Enter restore mode"
+#~ msgstr "Terugzetten afbreken"
+
+#~ msgid "Cancel restore"
+#~ msgstr "Terugzetten afbreken"
+
+#~ msgid "Add"
+#~ msgstr "Toevoegen"
+
+#~ msgid "Remove"
+#~ msgstr "Verwijderen"
+
+#~ msgid "Refresh"
+#~ msgstr "Verversen"
+
+#~ msgid "M"
+#~ msgstr "M"
+
+#~ msgid "Filename"
+#~ msgstr "Bestandsnaam"
+
+#~ msgid "Size"
+#~ msgstr "Omvang"
+
+#~ msgid "Date"
+#~ msgstr "Datum"
+
+#~ msgid "Perm."
+#~ msgstr "Perm."
+
+#~ msgid "User"
+#~ msgstr "Gebruiker"
+
+#~ msgid "Group"
+#~ msgstr "Groep"
+
+#~ msgid "Job Name"
+#~ msgstr "Naam opdracht:"
+
+#, fuzzy
+#~ msgid "Fileset"
+#~ msgstr "Bestandsnaam"
+
+#~ msgid "Please configure parameters concerning files to restore :"
+#~ msgstr "Configureer parameters voor het terugzetten van bestanden aub :"
+
+#~ msgid "always"
+#~ msgstr "altijd"
+
+#~ msgid "if newer"
+#~ msgstr "indien nieuwer"
+
+#~ msgid "if older"
+#~ msgstr "indien ouder"
+
+#~ msgid "never"
+#~ msgstr "nooit"
+
+#, fuzzy
+#~ msgid "Please configure parameters concerning files restoration :"
+#~ msgstr "Configureer parameters voor het terugzetten van bestanden aub :"
+
+#, fuzzy
+#~ msgid "Error : no clients returned by the director."
+#~ msgstr "Verbonden met de director."
+
+#, fuzzy
+#~ msgid "Error : no storage returned by the director."
+#~ msgstr "Verbonden met de director."
+
+#, fuzzy
+#~ msgid "Error : no jobs returned by the director."
+#~ msgstr "Verbonden met de director."
+
+#, fuzzy
+#~ msgid "RestoreFiles"
+#~ msgstr "Terugzetten geannuleerd."
+
+#, fuzzy
+#~ msgid "Please select a client."
+#~ msgstr "Kan de geselecteerde client niet vinden."
+
+#, fuzzy
+#~ msgid "Please select a restore date."
+#~ msgstr "Kiest u een director (1-%d): "
+
+#, fuzzy
+#~ msgid "Unexpected question has been received.\n"
+#~ msgstr "<< Onverwacht signaal ontvangen : "
+
+#, fuzzy
+#~ msgid " files selected to be restored."
+#~ msgstr "Geen Volumes gevonden om terug te zetten.\n"
+
+#, fuzzy
+#~ msgid " file selected to be restored."
+#~ msgstr "Selecteer Job media:"
+
+#, fuzzy
+#~ msgid "Please configure your restore (%ld files selected to be restored)..."
+#~ msgstr "Configureer parameters voor het terugzetten van bestanden aub :"
+
+#, fuzzy
+#~ msgid "Restore failed : no file selected.\n"
+#~ msgstr "Kan de geselecteerde client niet vinden."
+
+#, fuzzy
+#~ msgid "Restore failed : no file selected."
+#~ msgstr "Kan de geselecteerde client niet vinden."
+
+#, fuzzy
+#~ msgid "Restoring, please wait..."
+#~ msgstr "Terugzetten..."
+
+#~ msgid "Job failed."
+#~ msgstr "Job mislukt."
+
+#, fuzzy
+#~ msgid "Restore job terminated successfully."
+#~ msgstr "Terugzetten succesvol."
+
+#, fuzzy
+#~ msgid "Restore job terminated successfully.\n"
+#~ msgstr "Terugzetten succesvol.\n"
+
+#, fuzzy
+#~ msgid "Restore job cancelled by user."
+#~ msgstr "Terugzetten geannuleerd."
+
+#, fuzzy
+#~ msgid "Restore job cancelled by user.\n"
+#~ msgstr "Terugzetten geannuleerd."
+
+#~ msgid "Restore done successfully.\n"
+#~ msgstr "Terugzetten succesvol.\n"
+
+#~ msgid "Restore done successfully."
+#~ msgstr "Terugzetten succesvol."
+
+#, fuzzy
+#~ msgid "Applying restore configuration changes..."
+#~ msgstr "Corrigeer configuratie bestand aub.\n"
+
+#~ msgid "Failed to find the selected client."
+#~ msgstr "Kan de geselecteerde client niet vinden."
+
+#~ msgid "Failed to find the selected fileset."
+#~ msgstr "Kan de geselecteerde fileset niet vinden."
+
+#~ msgid "Restore cancelled."
+#~ msgstr "Terugzetten geannuleerd."
+
+#~ msgid "No results to list."
+#~ msgstr "Geen resultaten gevonden om te tonen."
+
+#~ msgid "No backup found for this client."
+#~ msgstr "Geen backup gevonden voor deze client."
+
+#~ msgid "ERROR"
+#~ msgstr "FOUT"
+
+#, fuzzy
+#~ msgid "Query failed"
+#~ msgstr "Job mislukt."
+
+#~ msgid "Cannot get previous backups list, see console."
+#~ msgstr "Kan vorige backuplijst niet ophalen, zie console."
+
+#~ msgid "JobName:"
+#~ msgstr "JobNaam:"
+
+#, fuzzy
+#~ msgid "ifnewer"
+#~ msgstr "indien nieuwer"
+
+#, fuzzy
+#~ msgid "ifolder"
+#~ msgstr "indien ouder"
+
+#, fuzzy
+#~ msgid "FileSet:"
+#~ msgstr "Bestandsnaam"
+
+#, fuzzy
+#~ msgid "Client:"
+#~ msgstr "Client"
+
+#, fuzzy
+#~ msgid "Storage:"
+#~ msgstr "Opslag"
+
+#~ msgid "Restoring..."
+#~ msgstr "Terugzetten..."
+
+#~ msgid "Please correct configuration file.\n"
+#~ msgstr "Corrigeer configuratie bestand aub.\n"
+
+#, fuzzy
+#~ msgid "Error : No configuration file loaded\n"
+#~ msgstr "Wijzigen configuratiebestand"
+
+#~ msgid "Connecting...\n"
+#~ msgstr "Verbinding maken ...\n"
+
+#~ msgid "Error : No director defined in config file.\n"
+#~ msgstr "Fout : Geen director gevonden in uw configuratie.\n"
+
+#~ msgid "Multiple directors found in your config file.\n"
+#~ msgstr "Meerdere directors gevonden in uw configuratiebestand.\n"
+
+#~ msgid "Please choose a director (1-%d): "
+#~ msgstr "Kiest u een director (1-%d): "
+
+#, fuzzy
+#~ msgid "Failed to connect to the director\n"
+#~ msgstr "Verbinding naar director opnieuw opzetten"
+
+#~ msgid "Connected\n"
+#~ msgstr "Verbonden\n"
+
+#~ msgid "<< Unexpected signal received : "
+#~ msgstr "<< Onverwacht signaal ontvangen : "
+
+#~ msgid "Connection terminated\n"
+#~ msgstr "Verbinding verbroken\n"
+
+#~ msgid "Apply"
+#~ msgstr "Toepassen"
+
+#~ msgid "Type your command below:"
+#~ msgstr "Voer uw opdracht hieronder in:"
+
+#~ msgid "Unknown command."
+#~ msgstr "Onbekende opdracht."
+
+#~ msgid "&About...\tF1"
+#~ msgstr "&Over...\tF1"
+
+#~ msgid "Show about dialog"
+#~ msgstr "Toon het Over scherm"
+
+#~ msgid "Connect"
+#~ msgstr "Verbonden"
+
+#~ msgid "Connect to the director"
+#~ msgstr "Verbinden met director"
+
+#~ msgid "Disconnect"
+#~ msgstr "Verbroken"
+
+#~ msgid "Disconnect of the director"
+#~ msgstr "Verbroken van de director"
+
+#~ msgid "Change of configuration file"
+#~ msgstr "Wijziging van configuratiebestand"
+
+#~ msgid "Change your default configuration file"
+#~ msgstr "Wijzig standaard configuratiebestand"
+
+#~ msgid "Edit your configuration file"
+#~ msgstr "Wijzigen configuratiebestand"
+
+#~ msgid "E&xit\tAlt-X"
+#~ msgstr "&Verlaat\tAlt-X"
+
+#~ msgid "Quit this program"
+#~ msgstr "Verlaat dit programma"
+
+#~ msgid "&File"
+#~ msgstr "&Bestand"
+
+#~ msgid "&Help"
+#~ msgstr "&Help"
+
+#~ msgid "Send"
+#~ msgstr "Versturen"
+
+#~ msgid "Error while parsing command line arguments, using defaults.\n"
+#~ msgstr ""
+#~ "Fout bij verwerken van opdrachtregel variabelen, maak nu gebruik van "
+#~ "standaard instelling.\n"
+
+#~ msgid "First run"
+#~ msgstr "Eerste run"
+
+#~ msgid ""
+#~ "Unable to read %s\n"
+#~ "Error: %s\n"
+#~ "Do you want to choose another one? (Press no to edit this file)"
+#~ msgstr ""
+#~ "Kan %s\n"
+#~ " niet lezenFout: %s\n"
+#~ "Wilt u een andere kiezen? (Toets nee om het bestand te wijzigen)"
+
+#~ msgid "Unable to read configuration file"
+#~ msgstr "Kan configuratiebestand niet lezen"
+
+#~ msgid "Please choose a configuration file to use"
+#~ msgstr "Kies een configuratiebestand om te gebruiken"
+
+#~ msgid ""
+#~ "This configuration file has been successfully read, use it as default?"
+#~ msgstr "Configuratiebestand met succes gelezen. Als standaard gebruiken?"
+
+#~ msgid "Configuration file read successfully"
+#~ msgstr "Configuratiebestand met succes gelezen"
+
+#~ msgid "Using this configuration file: %s\n"
+#~ msgstr "Dit configuratiebestand wordt gebruikt: %s\n"
+
+#~ msgid "Connecting to the director..."
+#~ msgstr "Verbinden met director ..."
+
+#~ msgid "Failed to unregister a data parser !"
+#~ msgstr "Data parser kon niet geregistreerd worden!"
+
+#~ msgid "Quitting.\n"
+#~ msgstr "Bezig met afsluiten.\n"
+
+#~ msgid "Please choose your default configuration file"
+#~ msgstr "Kies aub uw standaard configuratiebestand"
+
+#~ msgid "Use this configuration file as default?"
+#~ msgstr "Dit configuratiebestand als standaard gebruiken?"
+
+#~ msgid "Configuration file"
+#~ msgstr "Configuratiebestand"
+
+#~ msgid "Console thread terminated."
+#~ msgstr "Console taak beeindigd."
+
+#~ msgid "Connection to the director lost. Quit program?"
+#~ msgstr "Verbinding met de director verbroken. Programma stoppen?"
+
+#~ msgid "Connection lost"
+#~ msgstr "Verbinding verloren"
+
+#~ msgid "Connected to the director."
+#~ msgstr "Verbonden met de director."
+
+#~ msgid "Reconnect"
+#~ msgstr "Opnieuw verbinden"
+
+#~ msgid "Reconnect to the director"
+#~ msgstr "Verbinding naar director opnieuw opzetten"
+
+#~ msgid "Disconnected of the director."
+#~ msgstr "Verbinding verbroken met director"
+
+#, fuzzy
+#~ msgid "Unable to create component file %s. ERR=%s\n"
+#~ msgstr "Lees fout op bestand %s. FOUT=%s\n"
+
+#, fuzzy
+#~ msgid "Unable to fdopen component file %s. ERR=%s\n"
+#~ msgstr "Kan job cond variabele niet initialiseren: ERR=%s\n"
+
+#, fuzzy
+#~ msgid "Error writing component file.\n"
+#~ msgstr "Fout bij schrijven van bsr bestand.\n"
+
+#, fuzzy
+#~ msgid "ComponentInfo failed.\n"
+#~ msgstr "Opdracht mislukt."

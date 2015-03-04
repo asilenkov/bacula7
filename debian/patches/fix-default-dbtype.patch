@@ -1,0 +1,28 @@
+Description: Change default dbtype for possibility to install correct files
+ in packages for different dbtype.
+Author: Alexander Golovko <alexandro@ankalagon.ru>
+Last-Update: 2012-07-24
+
+
+--- a/platforms/systemd/bacula-dir.service.in
++++ b/platforms/systemd/bacula-dir.service.in
+@@ -18,7 +18,7 @@ Requires=var-run.mount nss-lookup.target network.target remote-fs.target syslog.
+ After=var-run.mount nss-lookup.target network.target remote-fs.target syslog.target time-sync.target
+ # Dependency about the database
+ # We let administrators decide if they need it (if local db instance)
+-# Wants=@DEFAULT_DB_TYPE@.service
++# Wants=XX_DBLONGNAME_XX.service
+ # Check if working dir exist and is a directory
+ ConditionPathIsDirectory=@working_dir@
+ # Before=
+--- a/src/cats/make_catalog_backup.in
++++ b/src/cats/make_catalog_backup.in
+@@ -19,7 +19,7 @@
+ #
+ #
+ 
+-default_db_type=@DEFAULT_DB_TYPE@
++default_db_type=XX_DBLONGNAME_XX
+ 
+ #
+ # See if the fifth argument is a valid backend name.

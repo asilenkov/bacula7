@@ -1,0 +1,48 @@
+# Galician translations for bacula package.
+# Copyright (C) 2012 THE bacula'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the bacula package.
+#
+# Jorge Barreiro <yortx.barry@gmail.com>, 2012.
+msgid ""
+msgstr ""
+"Project-Id-Version: bacula\n"
+"Report-Msgid-Bugs-To: bacula@packages.debian.org\n"
+"POT-Creation-Date: 2012-10-02 07:10+0200\n"
+"PO-Revision-Date: 2012-10-16 00:28+0200\n"
+"Last-Translator: Jorge Barreiro <yortx.barry@gmail.com>\n"
+"Language-Team: Galician <proxecto@trasno.net>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Lokalize 1.0\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid "Unsafe bacula-director password changed"
+msgstr "Cambiouse o contrasinal inseguro de «bacula-director»"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"This installation of Bacula was still using an unsafe password for access to "
+"the bacula-director service, as shipped with old versions of Bacula."
+msgstr ""
+"Esta instalación de Bacula aínda estaba a usar un contrasinal inseguro para "
+"acceder ao servizo «bacula-director», tal como se fornecía con versións "
+"antigas de Bacula."
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"In order to secure this Bacula server, the password in bacula-dir.conf has "
+"been modified. You will need to change it on clients so that they can still "
+"access the bacula-director service."
+msgstr ""
+"Para asegurar este servidor Bacula o contrasinal en «bacula-dir.conf» foi "
+"modificado. Terá que cambialo nos seus clientes para que poidan seguir "
+"accedendo ao servizo «bacula-director»."

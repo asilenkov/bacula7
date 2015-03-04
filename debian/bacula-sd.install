@@ -1,0 +1,7 @@
+usr/sbin/bacula-sd
+usr/sbin/bls
+usr/sbin/bextract
+etc/bacula/scripts/mtx-changer
+etc/bacula/scripts/mtx-changer.conf
+etc/bacula/scripts/disk-changer
+etc/bacula/scripts/dvd-handler

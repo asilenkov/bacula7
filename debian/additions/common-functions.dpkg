@@ -1,0 +1,280 @@
+#
+# Common functions, used from dpkg scripts
+#
+
+genRandomPassword()
+{
+    cat /dev/urandom | tr -dc _A-Z-a-z-0-9 | head -c33
+}
+
+readOrCreatePasswords()
+{
+    BACULAPWFILE=/etc/bacula/common_default_passwords
+    if [ -f $BACULAPWFILE ]; then
+        . $BACULAPWFILE
+    fi
+
+    if [ -z "$DIRPASSWD" -o -z "$DIRMPASSWD" -o -z "$SDPASSWD" -o \
+         -z "$SDMPASSWD" -o -z "$FDPASSWD" -o -z "$FDMPASSWD" ] ; then
+        # Create the passwords.
+        DIRPASSWD=`genRandomPassword`
+        DIRMPASSWD=`genRandomPassword`
+        SDPASSWD=`genRandomPassword`
+        SDMPASSWD=`genRandomPassword`
+        FDPASSWD=`genRandomPassword`
+        FDMPASSWD=`genRandomPassword`
+
+        # Save the passwords.
+        echo "# " > $BACULAPWFILE
+        chown root:root $BACULAPWFILE
+        chmod 0600 $BACULAPWFILE
+        cat >>$BACULAPWFILE <<EOF
+# This file holds defaults for new Bacula packages installed on this system.
+# It is used only when you install a new Bacula package, and can be
+# safely removed at any time.
+
+DIRPASSWD=$DIRPASSWD
+DIRMPASSWD=$DIRMPASSWD
+SDPASSWD=$SDPASSWD
+SDMPASSWD=$SDMPASSWD
+FDPASSWD=$FDPASSWD
+FDMPASSWD=$FDMPASSWD
+EOF
+    fi
+}
+
+
+
+#
+# Function for substitute variables into template
+# Usage: substitute <template> <output>
+#
+# will replace all occurance of XXX_var_XXX to value of environment variable `var'
+#
+
+substitute() {
+  local TEMPLATE DEST HOSTNAME SUBST_VARIABLES SEDCMD
+  TEMPLATE="$1"
+  DEST="$2"
+
+  HOSTNAME="${HOSTNAME:-`hostname --fqdn 2>/dev/null || hostname`}"
+
+  SUBST_VARIABLES="${SUBST_VARIABLES:-HOSTNAME DBNAME DBUSER DBPASS \
+    DIRPASSWD DIRMPASSWD SDPASSWD SDMPASSWD FDPASSWD FDMPASSWD}"
+
+  SEDCMD="sed"
+  for var in $SUBST_VARIABLES; do
+    value=$(eval echo "\$$var" |sed -e 's/[\/&]/\\&/g')
+    SEDCMD="$SEDCMD -e s/XXX_${var}_XXX/$value/g"
+  done
+
+  $SEDCMD "$TEMPLATE" >"$DEST"
+}
+
+
+
+#
+# Function for check if config already registered by the same package for 
+# other database type.
+# Usage: config_from_other_dbtype <package> <config>
+#
+
+config_from_other_dbtype() {
+  local PACKAGE CONFIG base_package_name regex
+  PACKAGE="$1"
+  CONFIG="$2"
+
+  base_package_name=$(echo "$PACKAGE" |sed -Ee 's/-(mysql|pgsql|sqlite3)$//')
+  regex="^$CONFIG:$base_package_name-(mysql|pgsql|sqlite3):"
+
+  ucfq -w "$CONFIG" |egrep -q "$regex"
+}
+
+
+
+#
+# Function for install config file from template
+# Usage: install_config <package> <config name> [ <template> ]
+#
+# use substitute() for generate config
+# use config_from_other_dbtype() for force reregister file with ucf
+# install and register generated file with ucf
+# 
+
+install_config() {
+  local PACKAGE CONFIG OLD_VERSION TEMPLATEa tempfile
+  PACKAGE="$1"
+  if [ $# -ge 3 ]; then
+    TEMPLATE="$2"
+    CONFIG="$3"
+  else
+    TEMPLATE="/usr/share/bacula-common/defconfig/$(basename '$CONFIG')"
+    CONFIG="$3"
+  fi
+  tempfile=`tempfile`
+
+
+  dpkg_conffile_md5sum="$(dpkg-query -W -f='${Conffiles}' \"$PACKAGE\" \
+    2>/dev/null |sed -ne "\' $CONFIG ' { s/ obsolete$//; s/.* //; p }")"
+
+  if [ -n "$dpkg_conffile_md5sum" ]; then
+    echo "$dpkg_conffile_md5sum default" >"$tempfile.md5sum"
+  fi
+
+  if [ -f "$TEMPLATE.md5sum" ]; then
+    cat "$TEMPLATE.md5sum" >>"$tempfile.md5sum"
+  fi
+
+
+  substitute "$TEMPLATE" "$tempfile"
+  ucf --debconf-ok --three-way "$tempfile" "$CONFIG"
+
+  # if config installed by the same package for other
+  # database type, we need force reregister it.
+  if config_from_other_dbtype "$PACKAGE" "$CONFIG"; then
+    ucfr -f "$PACKAGE" "$CONFIG"
+  else
+    ucfr "$PACKAGE" "$CONFIG"
+  fi
+
+  rm -f "$tempfile" "$tempfile.md5sum"
+}
+
+
+
+#
+# Function for setup /etc/default/*
+# Usage: call from postins script "setup_etc_default <package> $@"
+#
+# if there is fresh install, generate default /etc/default/* file
+# if there is upgrade from old version, then set ENABLED=no if /etc/bacula/do_not_run present
+# if there is upgrade from recent version, then preserve ENABLED, ARGS and CONFIG variables/
+#
+setup_etc_default() {
+    local PACKAGE SERVICE ARGS DEFAULT_ARGS ENABLED CONFIG DEFAULTS tempfile
+    PACKAGE="$1"
+
+    if [ "$2" != "configure" ]; then
+        return
+    fi
+
+    case "$1" in
+        bacula-fd)
+            SERVICE="bacula-fd"
+            ARGS=""
+            ;;
+        bacula-sd)
+            SERVICE="bacula-sd"
+            ARGS="-u bacula -g tape"
+            ;;
+        bacula-director-pgsql|bacula-director-mysql|bacula-director-sqlite3)
+            SERVICE="bacula-dir"
+            ARGS="-u bacula -g bacula"
+            if ucfq -w "/etc/default/bacula-dir" \
+                |egrep -q '^[^:]*:bacula-director-(pgsql|mysql|sqlite3):'; then
+                UCFR_ARGS="-f"
+            fi
+            ;;
+        *)
+            echo "setup_defaults: unknown package \"$1\"" >&2
+            return
+    esac
+
+
+    ENABLED="yes"
+    CONFIG="/etc/bacula/$SERVICE.conf"
+    DEFAULTS="/etc/default/$SERVICE"
+    UCFR_ARGS="${UCFR_ARGS:-}"
+
+
+    if [ -n "$3" ]; then
+        if dpkg --compare-versions "$3" lt "7.0.5"; then
+            if [ -f "/etc/bacula/do_not_run" ]; then
+                ENABLED="no"
+            fi
+        else
+            if [ -f "$DEFAULTS" ]; then
+                ENABLED=$(. $DEFAULTS; echo $ENABLED)
+                CONFIG=$(. $DEFAULTS; echo $CONFIG)
+            fi
+        fi
+    fi
+
+
+    #db_get "$PACKAGE/disable-service"
+    #if [ "$RET" = "true" ]; then
+    #    ENABLED="no"
+    #fi
+
+
+    tempfile=`tempfile`
+    cat >"$tempfile" <<_EOF
+# defaults file for $SERVICE
+
+# Service can be disabled by setting
+# ENABLED="no"
+ENABLED="$ENABLED"
+
+# Additional start arguments can be provided here
+# ARGS="$ARGS"
+ARGS="$ARGS"
+
+# Default config file can be changed here
+# CONFIG="/etc/bacula/$SERVICE.conf"
+CONFIG="$CONFIG"
+_EOF
+
+    ucf --debconf-ok "$tempfile" "$DEFAULTS"
+    ucfr $UCFR_ARGS "$PACKAGE" "$DEFAULTS"
+    rm -f "$tempfile"
+}
+
+
+check_and_fix_unsafe_director_password()
+{
+  local PACKAGE REGEX
+
+  PACKAGE="$1"
+
+  #
+  # There is a list of hardcoded bacula-dir passwords we need to change.
+  # It is a passwords from versions 5.0.2-1, 5.0.2-1~bpo50+1, 5.0.2-2,
+  # 5.0.2-2.1, 5.0.2-2.2, 5.0.2-2.2+b1, 5.0.2-2.2+squeeze1, 5.0.2-3, 5.0.3-1,
+  # 5.0.3-1+b1, 5.0.3+dfsg-0.1
+  #
+  # 0Cv70F6pf01t6pB0opT4vQOnigDrR0v3L              1iEtM8qGBcbEox73tYcMslqh9FHZQWHM5
+  # 2F9QsX5HXAhxMdF/lb9f7HH5kgO4/F6Y7qs4LBIYOIIc   2XfHt5qPm9p1VvoI85k4sxfONLOKyA7oL
+  # 3W445fZe3Rx3RwowRaasfvqAXUwKWrR4               4hOvLQMC3HZyZ0VcbsOoPQ6vhGrbrvHDL
+  # 4qByX84t7faibfxD34UltZ4qJ2USgj6                4QC2dWtqOtpXisWr6FkB6LlxCl5owtM6o
+  # 5Q5f0KkIARGboVoAAEnqRZGKbTvR2b                 6irFJb1VuTw6nqMoJjhVHsPtDCTHMyOQHjQUF9Vk32ca
+  # 6rAFCfK7IbMWPWrcLgji9qbo5sT212L8               6SH38Ric1fyQb6xZ2mdp2nAQtvOGZOLJq
+  # 6wdMnDM4CT8TOW6VOsnSttg2ZsL5iRRn               9rfAm3BrNnS0vNPyQVW6GYH2xG6F1rT
+  # 9UnjMj8qNDQyUL7YJpf6Ooe346e6o7VI               9XWwoB7f45Vb0wdLwXwd2RVEnhls7kuQa
+  # a5Q9WkjZJrI6isbM1B3hrMIjc3jovayg4              aymIYMBgljG7OLD6mynJGsM6kaO1JiWQ
+  # bP64DhKhdE3hFiwyt8ne5ZzWh9xjZvvCWvlB/SMJVtrp   BXROVXNeyF5no12LlPpoCtqSh1g3dHh7c
+  # CDofAhw2nMZpsuNjjoe3sM4XtH3cB19bP              Cv70F6pf1t6pBopT4vQOnigDrR0v3L
+  # DaQaoxNgWMA3lPCI5P8h23Q02Zacdm42G              e9kabod3EiTgx9qbNv4V5RjpF1HDjS9yx
+  # EGNg0Zh0UDFJpO0eq69ol9R4Ig5Bni3Ly              FsrYgGJPETv7sjhhkfU9hfaUlMiov6ssB
+  # GjZK2qGLHJakRp8j6hKxaZmqTsuwKB4nV              gyINS6bKThNm00a1n17m0by3YmI5Vfvmq
+  # hpfaKNMc3FAb6sTSeBQj2rHFZiPoCPx5c              KLKnxeJ9fo9n7XX9l1rZ85gjexJyCW1R
+  # LSI9O4UxSO4C68Sgog7i1UVoIDCX7GmB3              LTQ1ipXsaA6rhZaPqSaC6DNoPMML8L1f
+  # qnjbN71J3NVcv8bCrxuTA6tQG695stXj               rcb82RMxnwMjJX0uPqswTPVPwZBtNviiI
+  # rcCeojyNh8XzyE8noBO6G+u30ur+gIa1YtXPhnUMJ8jJ   S8jSXrIaGjucBQlFuEhmbp2jVEXf3r1v
+  # ShT7MAwYr266OifJZexThUYHLg3F7dkgR              ToNS3inSon4o/Aqeg0xLEFhKcpftFvOtO+xvmS1oNzt5
+  # tSLtGaKpfUumMeY83T2e0bRUvRdPCTynP              TtVEcetNhA2efDyQgHIHUdVObU5CdsI7WcodXdd+bynR
+  # UwPG7aIXF7jQ8IGhQZNhdBc21sT3U9UGA              Uyd4tCavXf2oxjVdNAypHbcql0yW4tW
+  # V06HqWef3HlWOrPhqcwNZSQpSvYdERgB               VFxkQ5mNv61q6uMncr2YjRpkE8sLQ9O
+  # VMnjGGIe1ih6im48HGTouUi4H7ijV74A               wbdPn9gXYLn9PmQ2HiCm1VWHPMSsM5wF
+  # XmOtJg1Adsxp8T73wtCAOKOUJ0r3pEF                ZFjFYMCU6HWWVxMNTQ10BmDUYvFrYwuwM
+  # x9tkKeZdfDjSgJeD1lTarCa32yP8EsfwjSjsIuO9n/J7
+
+  REGEX='Password = "(0Cv70F6pf01t6pB0opT4vQOnigDrR0v3L|1iEtM8qGBcbEox73tYcMslqh9FHZQWHM5|2F9QsX5HXAhxMdF\/lb9f7HH5kgO4\/F6Y7qs4LBIYOIIc|2XfHt5qPm9p1VvoI85k4sxfONLOKyA7oL|3W445fZe3Rx3RwowRaasfvqAXUwKWrR4|4hOvLQMC3HZyZ0VcbsOoPQ6vhGrbrvHDL|4qByX84t7faibfxD34UltZ4qJ2USgj6|4QC2dWtqOtpXisWr6FkB6LlxCl5owtM6o|5Q5f0KkIARGboVoAAEnqRZGKbTvR2b|6irFJb1VuTw6nqMoJjhVHsPtDCTHMyOQHjQUF9Vk32ca|6rAFCfK7IbMWPWrcLgji9qbo5sT212L8|6SH38Ric1fyQb6xZ2mdp2nAQtvOGZOLJq|6wdMnDM4CT8TOW6VOsnSttg2ZsL5iRRn|9rfAm3BrNnS0vNPyQVW6GYH2xG6F1rT|9UnjMj8qNDQyUL7YJpf6Ooe346e6o7VI|9XWwoB7f45Vb0wdLwXwd2RVEnhls7kuQa|a5Q9WkjZJrI6isbM1B3hrMIjc3jovayg4|aymIYMBgljG7OLD6mynJGsM6kaO1JiWQ|bP64DhKhdE3hFiwyt8ne5ZzWh9xjZvvCWvlB\/SMJVtrp|BXROVXNeyF5no12LlPpoCtqSh1g3dHh7c|CDofAhw2nMZpsuNjjoe3sM4XtH3cB19bP|Cv70F6pf1t6pBopT4vQOnigDrR0v3L|DaQaoxNgWMA3lPCI5P8h23Q02Zacdm42G|e9kabod3EiTgx9qbNv4V5RjpF1HDjS9yx|EGNg0Zh0UDFJpO0eq69ol9R4Ig5Bni3Ly|FsrYgGJPETv7sjhhkfU9hfaUlMiov6ssB|GjZK2qGLHJakRp8j6hKxaZmqTsuwKB4nV|gyINS6bKThNm00a1n17m0by3YmI5Vfvmq|hpfaKNMc3FAb6sTSeBQj2rHFZiPoCPx5c|KLKnxeJ9fo9n7XX9l1rZ85gjexJyCW1R|LSI9O4UxSO4C68Sgog7i1UVoIDCX7GmB3|LTQ1ipXsaA6rhZaPqSaC6DNoPMML8L1f|qnjbN71J3NVcv8bCrxuTA6tQG695stXj|rcb82RMxnwMjJX0uPqswTPVPwZBtNviiI|rcCeojyNh8XzyE8noBO6G\+u30ur\+gIa1YtXPhnUMJ8jJ|S8jSXrIaGjucBQlFuEhmbp2jVEXf3r1v|ShT7MAwYr266OifJZexThUYHLg3F7dkgR|ToNS3inSon4o\/Aqeg0xLEFhKcpftFvOtO\+xvmS1oNzt5|tSLtGaKpfUumMeY83T2e0bRUvRdPCTynP|TtVEcetNhA2efDyQgHIHUdVObU5CdsI7WcodXdd\+bynR|UwPG7aIXF7jQ8IGhQZNhdBc21sT3U9UGA|Uyd4tCavXf2oxjVdNAypHbcql0yW4tW|V06HqWef3HlWOrPhqcwNZSQpSvYdERgB|VFxkQ5mNv61q6uMncr2YjRpkE8sLQ9O|VMnjGGIe1ih6im48HGTouUi4H7ijV74A|wbdPn9gXYLn9PmQ2HiCm1VWHPMSsM5wF|XmOtJg1Adsxp8T73wtCAOKOUJ0r3pEF|ZFjFYMCU6HWWVxMNTQ10BmDUYvFrYwuwM|x9tkKeZdfDjSgJeD1lTarCa32yP8EsfwjSjsIuO9n\/J7)"'
+
+  if grep -Eq "$REGEX" "/etc/bacula/bacula-dir.conf"; then
+    readOrCreatePasswords
+    sed -i -Ee "s/$REGEX/Password = \"$(eval echo \"\$DIRPASSWD\" |sed -e 's/[\/&]/\\&/g')\"/" "/etc/bacula/bacula-dir.conf"
+
+    db_input high $PACKAGE/unsafe-director-password-was-changed || true
+    db_go
+  fi
+}

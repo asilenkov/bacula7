@@ -1,0 +1,86 @@
+#!/usr/bin/perl
+
+# Script to install files used by dbconfig-common to install and upgrade
+# databases
+# (c) 2011 Debian project, Jan Hauke Rahm <jhr@debian.org>
+# Based on make macros written by John Goerzen
+
+# Arguments needed:
+# 1: database type (sqlite3, mysql, pgsql)
+# 2: package version
+# 3: bacula database version to support
+#
+# There are three ways to call this script:
+# 1) ./script db-type
+# 2) ./script db-type version
+# 3) ./script db-type version bacula-db
+#
+# The first will install the SQL stuff needed to create the database during
+# package installations. The second will install the SQL stuff needed to
+# upgrade to the latest version of the bacula-db. The third will install
+# additional SQL upgrade stuff if we skipped a bacula db version in Debian.
+#
+# Example: lenny had package version 2.4.4 with bacula db version 10, squeeze has
+#          package version 5.0.0 with bacula db version 12.
+#          Always needed is the installation stuff:
+#    ./script db-type
+#          Then we need to migrate the db from 10 (2.4.4) to 11 (3.0.0)
+#    ./script db-type 3.0.0 11
+#          Finally we need to migrate from 11 to 12 (3.0.0 to 5.0.0) which
+#          upstream ships as "latest upgrade"
+#    ./script db-type 5.0.0
+
+use strict;
+use File::Path "make_path";
+
+my $DBC = "usr/share/dbconfig-common/data";
+
+my $db		= $ARGV[0];
+my $pkgver	= $ARGV[1];
+my $dbver	= $ARGV[2];
+
+my $longdb	= $db;
+$longdb = ($db eq "pgsql") ? "postgresql" : $db;
+
+if (@ARGV == 1) {
+	install($db);
+} elsif (@ARGV == 2) {
+	latest($db, $pkgver);
+} elsif (@ARGV == 3) {
+	update($db, $pkgver, $dbver);
+} else {
+	exit 1;
+}
+
+sub install {
+	make_path("debian/bacula-director-$db/$DBC/bacula-director-$db/install");
+	extract_here("src/cats/make_".$longdb."_tables", "debian/bacula-director-$db/$DBC/bacula-director-$db/install/$db");
+}
+
+sub latest {
+	make_path("debian/bacula-director-$db/$DBC/bacula-director-$db/upgrade/$db");
+	extract_here("src/cats/update_".$longdb."_tables", "debian/bacula-director-$db/$DBC/bacula-director-$db/upgrade/$db/$pkgver");
+}
+
+sub update {
+	my $path = ($dbver - 1) . "_to_" . $dbver;
+
+	make_path("debian/bacula-director-$db/$DBC/bacula-director-$db/upgrade/$db");
+	extract_here("updatedb/update_".$longdb."_tables_$path", "debian/bacula-director-$db/$DBC/bacula-director-$db/upgrade/$db/$pkgver");
+}
+
+sub extract_here {
+	my $input = shift;
+	my $output = shift;
+
+	my $found = 0;
+
+	open (INPUT, '<', $input);
+	open (OUTPUT, '>', $output);
+	while (<INPUT>) {
+		if (m/END.OF.DATA/ && !$found) {$found = 1; next;};
+		last if (m/END.OF.DATA/);
+		print OUTPUT $_ if $found;
+	}
+	close (INPUT);
+}

@@ -1,0 +1,4 @@
+etc/bacula/scripts/query.sql
+usr/sbin/bwild
+usr/sbin/bregex
+debian/additions/postinst-common	usr/share/bacula-director

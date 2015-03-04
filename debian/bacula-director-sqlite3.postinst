@@ -1,0 +1,104 @@
+#!/bin/sh
+# postinst script for bacula-director-sqlite3
+#
+
+set -e
+
+. /usr/share/debconf/confmodule
+db_version 2.0
+
+# summary of how this script can be called:
+#        * <postinst> `configure' <most-recently-configured-version>
+#        * <old-postinst> `abort-upgrade' <new version>
+#        * <conflictor's-postinst> `abort-remove' `in-favour' <package>
+#          <new-version>
+#        * <deconfigured's-postinst> `abort-deconfigure' `in-favour'
+#          <failed-install-package> <version> `removing'
+#          <conflicting-package> <version>
+# for details, see http://www.debian.org/doc/debian-policy/ or
+# the debian-policy package
+#
+# quoting from the policy:
+#     Any necessary prompting should almost always be confined to the
+#     post-installation script, and should be protected with a conditional
+#     so that unnecessary prompting doesn't happen if a package's
+#     installation fails and the `postinst' is called with `abort-upgrade',
+#     `abort-remove' or `abort-deconfigure'.
+
+dbc_first_version=3.0.3-3
+dbc_dbfile_owner=bacula:bacula
+# set in config, must not be set here: dbc_dbuser=bacula
+# set in config, must not be set here: dbc_dbname=bacula.db
+# set in config, must not be set here: dbc_basepath=/var/lib/bacula
+
+if test "$1" = "configure" -a -n "$2" && dpkg --compare-versions "$2" lt "7.0.5"; then
+  invoke-rc.d bacula-director stop || true
+fi
+
+# source dbconfig-common shell library, and call the hook function
+if [ -f /usr/share/dbconfig-common/dpkg/config.sqlite3 ]; then
+  . /usr/share/dbconfig-common/dpkg/postinst.sqlite3
+  dbc_go bacula-director-sqlite3 $@
+fi
+
+LOGDIR="/var/log/bacula"
+POSTINST_COMMON="/usr/share/bacula-director/postinst-common"
+DEFCONFIG="/usr/share/bacula-common/defconfig"
+CFGFILE="/etc/bacula/bacula-dir.conf"
+
+. /usr/share/bacula-common/common-functions.dpkg
+readOrCreatePasswords
+setup_etc_default bacula-director-sqlite3 $@
+
+case "$1" in
+configure)
+	check_and_fix_unsafe_director_password bacula-director-sqlite3
+
+	echo -n "Processing configuration..."
+        . /etc/dbconfig-common/bacula-director-sqlite3.conf
+	TARGET=$CFGFILE.dpkg-tmp
+        # FIXME: should this tweak make_catalog_backup like bacula-director-pgsql.postinst does?
+        BACULADBNAME=`echo "$dbc_dbname" | sed 's/.db$//'`
+
+	sed -e s~XXX_DIRPASSWORD_XXX~$DIRPASSWD~ \
+	        -e s~XXX_MONDIRPASSWORD_XXX~$DIRMPASSWD~ \
+	        -e s~XXX_SDPASSWORD_XXX~$SDPASSWD~ \
+	        -e s~XXX_FDPASSWORD_XXX~$FDPASSWD~ \
+                -e "s~/XXX_DBNAME_XXX~/$BACULADBNAME~" \
+		-e "s~\"XXX_DBNAME_XXX~\"$BACULADBNAME~" \
+		-e s~XXX_DBUSER_XXX~~ \
+		-e s~XXX_DBPASSWORD_XXX~~ \
+			$DEFCONFIG/bacula-dir.conf > $TARGET
+ 
+
+  DBNAME="$BACULADBNAME"
+  SUBST_VARIABLES=DBNAME
+  install_config \
+    bacula-director-sqlite3 \
+    /usr/share/bacula-common/defconfig/scripts/delete_catalog_backup \
+    /etc/bacula/scripts/delete_catalog_backup
+
+
+	sh $POSTINST_COMMON
+
+	echo "Ok."
+	;;
+
+abort-upgrade|abort-remove|abort-deconfigure)
+
+	;;
+
+*)
+	echo "postinst called with unknown argument \`$1'" >&2
+	exit 1
+	;;
+esac
+
+# Do start daemon
+db_stop
+
+invoke-rc.d bacula-director start || exit $?-
+
+#DEBHELPER#
+
+exit 0

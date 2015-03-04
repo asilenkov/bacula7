@@ -1,0 +1,5 @@
+usr/share/man/man1/bacula-tray-monitor.1.gz usr/share/man/man1/bacula-traymonitor.1.gz
+usr/sbin/bacula-tray-monitor usr/sbin/bacula-traymonitor
+# remove the following post-wheezy
+usr/sbin/bacula-tray-monitor usr/bin/bacula-tray-monitor
+usr/sbin/bacula-tray-monitor usr/bin/bacula-traymonitor

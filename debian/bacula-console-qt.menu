@@ -1,0 +1,2 @@
+?package(bacula-console-qt):needs="X11" section="Applications/System/Administration" \
+  title="Bacula qtConsole" command="/usr/sbin/bat"

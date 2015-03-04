@@ -1,0 +1,15 @@
+etc/bacula/scripts/btraceback.gdb
+usr/lib/bacula/libbaccfg*.so
+usr/lib/bacula/libbacfind*.so
+usr/lib/bacula/libbac.so
+usr/lib/bacula/libbac-*.so
+usr/sbin/btraceback		usr/lib/bacula
+usr/sbin/bsmtp
+debian/additions/common-functions.init		usr/share/bacula-common
+debian/additions/common-functions.dpkg		usr/share/bacula-common
+etc/bacula/bat.conf		usr/share/bacula-common/defconfig
+etc/bacula/bconsole.conf	usr/share/bacula-common/defconfig
+etc/bacula/bacula-sd.conf	usr/share/bacula-common/defconfig
+etc/bacula/bacula-fd.conf	usr/share/bacula-common/defconfig
+etc/bacula/bacula-dir.conf	usr/share/bacula-common/defconfig
+platforms/systemd/bacula.conf	etc/tmpfiles.d

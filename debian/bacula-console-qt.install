@@ -1,0 +1,3 @@
+usr/sbin/bat
+src/qt-console/images/bat_icon.png	usr/share/pixmaps
+scripts/bat.desktop	usr/share/applications

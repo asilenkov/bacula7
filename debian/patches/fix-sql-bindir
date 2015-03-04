@@ -1,0 +1,28 @@
+Description: Fix SQL BINDIR
+Author: Jan Hauke Rahm <jhr@debian.org>
+Reviewed-by: Alexander Golovko <alexandro@ankalagon.ru>
+Reviewed-by: Luca Capello <luca@pca.it>
+Last-Update: 2012-06-28
+
+diff --git a/autoconf/bacula-macros/db.m4 b/autoconf/bacula-macros/db.m4
+index 8ef51bb..e852fad 100644
+--- a/autoconf/bacula-macros/db.m4
++++ b/autoconf/bacula-macros/db.m4
+@@ -223,7 +223,7 @@ AC_HELP_STRING([--with-dbi-driver@<:@=DRIVER@:>@], [Suport for DBI driver. DRIVE
+            db_prog="postgresql"
+            PG_CONFIG=`which pg_config 2>/dev/null`
+            if test -n "$PG_CONFIG"; then
+-              POSTGRESQL_BINDIR=`"$PG_CONFIG" --bindir`
++              POSTGRESQL_BINDIR=/usr/bin
+               POSTGRESQL_LIBDIR=`"$PG_CONFIG" --libdir`
+            elif test -f /usr/local/bin/psql; then
+               POSTGRESQL_BINDIR=/usr/local/bin
+@@ -783,7 +783,7 @@ AC_HELP_STRING([--with-postgresql@<:@=DIR@:>@], [Include PostgreSQL support. DIR
+           if test -n "$PG_CONFIG"; then
+               POSTGRESQL_INCDIR=`"$PG_CONFIG" --includedir`
+               POSTGRESQL_LIBDIR=`"$PG_CONFIG" --libdir`
+-              POSTGRESQL_BINDIR=`"$PG_CONFIG" --bindir`
++              POSTGRESQL_BINDIR=/usr/bin
+           elif test -f /usr/local/include/libpq-fe.h; then
+               POSTGRESQL_INCDIR=/usr/local/include
+               if test -d /usr/local/lib64; then

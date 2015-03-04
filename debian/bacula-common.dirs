@@ -1,0 +1,3 @@
+etc/bacula
+var/lib/bacula
+var/log/bacula

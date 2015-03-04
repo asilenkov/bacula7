@@ -1,0 +1,18 @@
+# These templates have been reviewed by the debian-l10n-english
+# team
+#
+# If modifications/additions/rewording are needed, please ask
+# debian-l10n-english@lists.debian.org for advice.
+#
+# Even minor modifications require translation updates and such
+# changes should be coordinated with translators and reviewers.
+
+Template: bacula-director-mysql/unsafe-director-password-was-changed
+Type: error
+_Description: Unsafe bacula-director password changed
+ This installation of Bacula was still using an unsafe password for access
+ to the bacula-director service, as shipped with old versions of Bacula.
+ .
+ In order to secure this Bacula server, the password in bacula-dir.conf
+ has been modified. You will need to change it on clients so that they can
+ still access the bacula-director service.

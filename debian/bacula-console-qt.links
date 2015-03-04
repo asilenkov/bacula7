@@ -1,0 +1,4 @@
+usr/share/man/man1/bat.1.gz usr/share/man/man1/bacula-console-qt.1.gz
+usr/sbin/bat usr/sbin/bacula-console-qt
+# remove the following post-wheezy
+usr/sbin/bat usr/bin/bat

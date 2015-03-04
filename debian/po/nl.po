@@ -1,0 +1,46 @@
+# Dutch bacula po-debconf translation,
+# Copyright (C) 2012 THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the bacula package.
+# Vincent Zweije <vincent@zweije.nl>, 2012.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bacula 7.0.5\n"
+"Report-Msgid-Bugs-To: bacula@packages.debian.org\n"
+"POT-Creation-Date: 2012-10-02 07:10+0200\n"
+"PO-Revision-Date: 2012-11-07 16:28+0000\n"
+"Last-Translator: Vincent Zweije <vincent@zweije.nl>\n"
+"Language-Team: Debian-Dutch <debian-l10n-dutch@lists.debian.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid "Unsafe bacula-director password changed"
+msgstr ""
+"Onveilig bacula-director wachtwoord gewijzigd"
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"This installation of Bacula was still using an unsafe password for access to "
+"the bacula-director service, as shipped with old versions of Bacula."
+msgstr ""
+"Deze installatie van Bacula gebruikte nog een onveilig wachtwoord voor toegang "
+"tot de bacula-director dienst, zoals dat meekwam met oude Bacula versies."
+
+#. Type: error
+#. Description
+#: ../bacula-director-db.templates.in:2001
+msgid ""
+"In order to secure this Bacula server, the password in bacula-dir.conf has "
+"been modified. You will need to change it on clients so that they can still "
+"access the bacula-director service."
+msgstr ""
+"Om deze Bacula server te beschermen is het wachtwoord in bacula-dir.conf "
+"gewijzigd. U dient het wachtwoord ook op clients te wijzigen opdat zij de "
+"bacula-director dienst kunnen blijven gebruiken."

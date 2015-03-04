@@ -1,0 +1,9 @@
+etc/bacula/scripts/make_sqlite*tables usr/share/bacula-director
+etc/bacula/scripts/update_sqlite* usr/share/bacula-director
+etc/bacula/scripts/make_catalog_backup
+debian/additions/sqlite3/delete_catalog_backup.md5sum usr/share/bacula-common/defconfig/scripts
+etc/bacula/scripts/delete_catalog_backup usr/share/bacula-common/defconfig/scripts
+etc/bacula/scripts/*catalog_backup.pl
+debian/additions/sqlite3/make_catalog_backup_awk      etc/bacula/scripts
+usr/sbin/bacula-dir
+usr/sbin/dbcheck
